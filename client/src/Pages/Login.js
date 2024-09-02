@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import facebookLogo from "../../assets/images/facebook.png";
-import googleLogo from "../../assets/images/google.png";
-import loginImage from "../../assets/images/loginImage.jpg";
+import facebookLogo from "../assets/images/facebook.png";
+import googleLogo from "../assets/images/google.png";
+import loginImage from "../assets/images/loginImage.jpg";
 
 const Login = () => {
   const [email, setEmail] = useState("");

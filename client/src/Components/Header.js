@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function Header() {
   return (
-    <div>
-      Header
-    </div>
-  )
+    <nav class="bg-white border-b border-gray-200 shadow-sm">
+      asd
+    </nav>
+  );
 }
 
-export default Header
+export default Header;

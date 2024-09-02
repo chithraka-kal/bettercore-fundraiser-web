@@ -5,6 +5,7 @@ function App() {
     <Routes>
       <Route index element={<IndexPage />} />
     </Routes>
+    
   );
 }
 

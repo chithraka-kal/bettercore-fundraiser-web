@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import facebookLogo from "../../assets/images/facebook.png";
+import googleLogo from "../../assets/images/google.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,18 +19,14 @@ const Login = () => {
           Sign In
         </h2>
 
-        <button className="flex items-center justify-center w-full px-4 py-3 mb-4 text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-100">
-          <img
-            src="src\assets\images\google.png"
-            alt="Google logo"
-            className="w-6 h-6 mr-3"
-          />
+        <button className="flex items-center justify-center w-full px-4 py-3 mb-4 text-white bg-black border border-gray-300 rounded-xl hover:bg-gray-700">
+          <img src={googleLogo} alt="Google logo" className="w-6 h-6 mr-3" />
           Sign in with Google
         </button>
 
-        <button className="flex items-center justify-center w-full px-4 py-3 mb-6 text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-100">
+        <button className="flex items-center justify-center w-full px-4 py-3 mb-6 text-white bg-[#1877F2] border border-gray-300 rounded-xl hover:bg-white hover:text-black">
           <img
-            src="src\assets\images\facebook.png"
+            src={facebookLogo}
             alt="Facebook logo"
             className="w-6 h-6 mr-3"
           />
@@ -79,9 +78,12 @@ const Login = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don’t have an account?{" "}
-            <a href="#" className="font-semibold text-indigo-600">
+            <Link
+              to="/register"
+              className="font-semibold text-indigo-600 transition-colors duration-200 hover:text-indigo-800"
+            >
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

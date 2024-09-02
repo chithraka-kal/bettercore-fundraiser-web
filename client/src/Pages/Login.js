@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import facebookLogo from "../assets/images/facebook.png";
 import googleLogo from "../assets/images/google.png";
+import logo from "../assets/images/hopelink.png";
 import loginImage from "../assets/images/loginImage.jpg";
 
 const Login = () => {
@@ -15,10 +16,11 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
-      <div className="flex flex-col w-full max-w-4xl h-[600px] bg-white shadow-lg md:flex-row rounded-2xl">
+      <div className="flex flex-col w-full max-w-4xl h-[700px] bg-white shadow-2xl md:flex-row rounded-2xl ">
         {/* Left side (form) */}
-        <div className="w-full p-6 md:w-1/2">
+        <div className="flex flex-col justify-center w-full p-6 md:w-1/2">
           <h2 className="mb-4 text-2xl font-bold text-center text-gray-800">
+            <img src={logo} width={250} className="m-auto my-2" />
             Sign In
           </h2>
 

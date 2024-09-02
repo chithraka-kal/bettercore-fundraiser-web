@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 function Layout({}) {
   return (
-    <main className="w-full flex flex-col">
+    <main className="w-full max-w-[1920px] mx-auto min-h-screen flex flex-col">
       <Header />
       <Outlet />
       <Footer />

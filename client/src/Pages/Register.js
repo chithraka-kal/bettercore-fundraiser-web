@@ -1,10 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import facebookLogo from "../assets/images/facebook.png";
+import googleLogo from "../assets/images/google.png";
+import logo from "../assets/images/hopelink.png";
+import registerImage from "../assets/images/registerImage.jpg";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <div>
-      <h2>Register</h2>
-      <form>{}</form>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-900 to-90%">
+      <div className="flex flex-col w-full h-full max-w-screen-lg bg-white shadow-2xl md:h-auto md:flex-row rounded-2xl">
+        {}
+        <div className="hidden w-full bg-gray-200 md:block md:w-1/2">
+          <img
+            src={registerImage}
+            alt="Register visual"
+            className="object-cover w-full h-full"
+          />
+        </div>
+
+        {}
+        <div className="flex flex-col justify-center w-full h-full p-6 md:w-1/2 md:h-auto">
+          <h2 className="mb-4 text-2xl font-bold text-center text-gray-800">
+            <img src={logo} width={250} className="m-auto my-2" />
+            Register
+          </h2>
+
+          <button className="flex items-center justify-center w-full px-3 py-2 mb-2 text-white bg-black border border-gray-300 rounded-lg hover:bg-gray-700">
+            <img src={googleLogo} alt="Google logo" className="w-5 h-5 mr-2" />
+            Register with Google
+          </button>
+
+          <button className="flex items-center justify-center w-full px-3 py-2 mb-3 text-white bg-[#1877F2] border border-gray-300 rounded-lg hover:bg-white hover:text-black">
+            <img
+              src={facebookLogo}
+              alt="Facebook logo"
+              className="w-5 h-5 mr-2"
+            />
+            Register with Facebook
+          </button>
+
+          <div className="relative mb-4 text-center">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative px-2 text-gray-500 bg-white">or</div>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+            >
+              Register
+            </button>
+          </form>
+
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-semibold text-indigo-600 transition-colors duration-200 hover:text-indigo-800"
+              >
+                Sign in
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

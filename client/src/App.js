@@ -1,11 +1,14 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Login from "./Components/Auth/Login";
 import IndexPage from "./Pages/IndexPage";
 function App() {
   return (
-    <Routes>
-      <Route index element={<IndexPage />} />
-    </Routes>
-    
+    <>
+      <Login />
+      <Routes>
+        <Route index element={<IndexPage />} />
+      </Routes>
+    </>
   );
 }
 

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function IndexPage() {
+function Header() {
   return (
     <div>
-      index
+      <h1>Index Page Working!</h1>
     </div>
-  )
+  );
 }
 
-export default IndexPage
+export default Header;

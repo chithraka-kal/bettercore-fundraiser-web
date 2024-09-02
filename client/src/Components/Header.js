@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import logo from "../assets/logo.png";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -10,9 +10,11 @@ function Header() {
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
-      <div className="text-xl font-bold text-red-600">hopelink</div>
+      <div className="text-xl font-bold text-red-600">
+        <img src={logo} width={150} />
+      </div>
 
-      <div className="relative w-full md:w-auto">
+      <div className="relative hidden md:w-auto md:flex">
         <input
           type="text"
           className="w-full px-10 py-2 border border-gray-300 rounded-full md:w-96 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
@@ -35,7 +37,6 @@ function Header() {
       </div>
 
       <div className="flex items-center space-x-6 text-gray-800 md:flex md:space-x-6">
-        {}
         <div className="hidden space-x-6 md:flex">
           <Link to="/campaigns" className="font-bold hover:text-gray-500">
             Campaigns
@@ -45,8 +46,7 @@ function Header() {
           </Link>
         </div>
 
-        {}
-        <div className="flex">
+        <div className="hidden md:flex">
           <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
             Sign up
           </button>
@@ -55,7 +55,6 @@ function Header() {
           </button>
         </div>
 
-        {}
         <button
           onClick={toggleMenu}
           className="flex items-center text-gray-800 md:hidden focus:outline-none"
@@ -75,24 +74,42 @@ function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`fixed inset-0 bg-white shadow-md z-50 md:hidden ${
           isMenuOpen ? "block" : "hidden"
         }`}
       >
-        <div className="flex flex-col items-center py-4">
+        <div className="relative flex flex-col items-center py-4">
+          <button
+            onClick={toggleMenu}
+            className="absolute text-gray-600 top-4 right-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
           <Link to="/campaigns" className="py-2 font-bold hover:text-gray-500">
             Campaigns
           </Link>
           <Link to="/about-us" className="py-2 font-bold hover:text-gray-500">
             About Us
           </Link>
+
           <div className="flex flex-col items-center mt-4 space-y-2">
-            <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
+            <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-lg">
               Sign up
             </button>
-            <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-full">
+            <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-lg">
               Sign in
             </button>
           </div>

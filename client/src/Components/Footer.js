@@ -9,7 +9,6 @@ function Footer() {
   return (
     <footer className="bg-[#2C1C18] text-gray-300 py-10">
       <div className="container flex flex-col items-center justify-between px-8 mx-auto md:flex-row md:items-start">
-        {}
         <div className="text-center md:text-left md:w-1/2">
           <h3 className="mb-4 text-lg font-semibold text-white">
             What is hopelink?
@@ -28,7 +27,6 @@ function Footer() {
           </div>
         </div>
 
-        {}
         <div className="mt-8 text-center md:text-right md:w-1/2 md:mt-0">
           <h3 className="mb-4 text-lg font-semibold text-white">Company</h3>
           <ul className="space-y-2">
@@ -64,23 +62,34 @@ function Footer() {
             </li>
           </ul>
           <div className="flex justify-center mt-6 space-x-4 md:justify-end">
-            <a href="#" className="text-white hover:text-gray-400">
-              <i className="fa-brands fa-facebook"></i>
+            <a
+              href="https://facebook.com"
+              className="text-white hover:text-gray-400"
+            >
+              <i className="fab fa-facebook"></i>
             </a>
-            <a href="#" className="text-white hover:text-gray-400">
-              <i className="fa-brands fa-instagram"></i>
+            <a
+              href="https://instagram.com"
+              className="text-white hover:text-gray-400"
+            >
+              <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" className="text-white hover:text-gray-400">
-              <i className="fa-brands fa-twitter"></i>
+            <a
+              href="https://twitter.com"
+              className="text-white hover:text-gray-400"
+            >
+              <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" className="text-white hover:text-gray-400">
-              <i className="fa-brands fa-youtube"></i>
+            <a
+              href="https://youtube.com"
+              className="text-white hover:text-gray-400"
+            >
+              <i className="fab fa-youtube"></i>
             </a>
           </div>
         </div>
       </div>
 
-      {}
       <div className="pt-4 mt-8 text-center text-gray-400 border-t border-gray-700">
         <p>© 2024 hopelink. All rights reserved.</p>
       </div>

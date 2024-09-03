@@ -12,13 +12,13 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Handle registration logic here
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-900 to-90%">
-      <div className="flex flex-col w-full h-full max-w-screen-lg bg-white shadow-2xl md:h-auto md:flex-row rounded-2xl">
-        {}
-        <div className="hidden w-full bg-gray-200 md:block md:w-1/2">
+      <div className="flex flex-col w-full h-screen overflow-hidden bg-white rounded-none shadow-2xl md:flex-row ">
+        <div className="hidden w-full md:block md:w-2/3">
           <img
             src={registerImage}
             alt="Register visual"
@@ -26,10 +26,9 @@ const Register = () => {
           />
         </div>
 
-        {}
-        <div className="flex flex-col justify-center w-full h-full p-6 md:w-1/2 md:h-auto">
+        <div className="flex flex-col justify-center w-full h-full p-6 md:w-1/3">
           <h2 className="mb-4 text-2xl font-bold text-center text-gray-800">
-            <img src={logo} width={250} className="m-auto my-2" />
+            <img src={logo} width={250} className="m-auto my-2" alt="Logo" />
             Register
           </h2>
 

@@ -47,12 +47,16 @@ function Header() {
         </div>
 
         <div className="hidden md:flex">
-          <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
-            Sign up
-          </button>
-          <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-full">
-            Sign in
-          </button>
+          <Link to="/register">
+            <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
+              Sign up
+            </button>
+          </Link>
+          <Link to="/login">
+            <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-full">
+              Sign in
+            </button>
+          </Link>
         </div>
 
         <button

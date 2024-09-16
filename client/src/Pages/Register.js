@@ -14,7 +14,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(server + "auth/register", {
+    await fetch(server + "auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,10 +27,13 @@ const Register = () => {
         password,
         confirmPassword,
       }),
-    });
-    const data = await res.json();
-    alert(data.message);
-    if (res.status === 201) setRedirect(true);
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        alert(data.message);
+        if (res.status === 201) setRedirect(true);
+      })
+      .catch((error) => console.log(error));
   };
 
   if (redirect) {

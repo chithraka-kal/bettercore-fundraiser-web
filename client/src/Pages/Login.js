@@ -10,7 +10,7 @@ const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(server + "auth/login", {
+    await fetch(server + "auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,17 +20,21 @@ const Login = () => {
         password,
       }),
       credentials: "include",
-    });
+    })
+      .then(async (res) => {
+        const data = await res.json();
 
-    const data = await res.json();
-
-    if (res.ok) {
-      setUserInfo(data);
-      alert("Login successful");
-      setRedirect(true);
-    } else {
-      alert(data.message);
-    }
+        if (res.ok) {
+          setUserInfo(data);
+          alert("Login successful");
+          setRedirect(true);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   if (redirect) {

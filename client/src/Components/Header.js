@@ -13,13 +13,17 @@ function Header() {
   useEffect(() => {
     fetch(server + "user", {
       credentials: "include",
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
-          setUserInfo(data);
-        });
-      }
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => {
+            setUserInfo(data);
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

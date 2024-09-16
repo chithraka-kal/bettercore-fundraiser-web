@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { server } from "../utils";
+import { UserContext } from "../context/UserContext";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { setUserInfo } = useContext(UserContext);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    fetch(server + "user", {
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setUserInfo(data);
+        });
+      }
+    });
+  }, []);
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md">

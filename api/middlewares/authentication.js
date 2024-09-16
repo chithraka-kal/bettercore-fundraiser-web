@@ -1,6 +1,9 @@
+const jwt = require("jsonwebtoken");
+
 const authenticateUser = async (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
+    console.log("Unauthorized");
     return res.status(401).json({ message: "Unauthorized" });
   }
   try {
@@ -11,7 +14,9 @@ const authenticateUser = async (req, res, next) => {
     req.user = { id, email, role };
     next();
   } catch (error) {
+    console.log(error);
     return res.status(401).json({ message: "Unauthorized" });
+    
   }
 };
 

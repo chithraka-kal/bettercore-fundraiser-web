@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
     if (passOk) {
       jwt.sign(
         { email, id: user.id },
-        "asdjpoiacvnjianouqweru3094uqbpoaf34124",
+        "asdjpoiacvnjianouqweru3094uqbpoaf34124", //should be in .env
         {},
         (err, token) => {
           if (err) {

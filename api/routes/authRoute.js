@@ -3,6 +3,7 @@ const User = require("../models/User");
 const router = express.Router();
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const sendEmail = require("../services/emailService");
 const salt = bycrypt.genSaltSync(10);
 
 router.post("/register", async (req, res) => {
@@ -16,6 +17,7 @@ router.post("/register", async (req, res) => {
       phone,
       role: "user",
     });
+    sendEmail(email, "Welcome to Hope Link", "Thank you for signing up!");
     res.status(201).json({ message: "user account created." });
   } catch (error) {
     res.status(400).json({ message: error.message });

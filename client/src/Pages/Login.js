@@ -1,14 +1,45 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import loginImage from "../assets/images/loginImage.jpg";
-
+import { server } from "../utils";
+import { UserContext } from "../context/UserContext";
 const Login = () => {
+  const { setUserInfo } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const [redirect, setRedirect] = useState(false);
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await fetch(server + "auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      credentials: "include",
+    })
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (res.ok) {
+          setUserInfo(data);
+          alert("Login successful");
+          setRedirect(true);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="flex min-h-screen bg-gradient-to-r from-purple-900 to-purple-600">

@@ -1,18 +1,44 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import registerImage from "../assets/images/registerImage.jpg";
+import { server } from "../utils";
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [fname, setFirstName] = useState("");
+  const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await fetch(server + "auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fname,
+        lname,
+        email,
+        phone,
+        password,
+        confirmPassword,
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        alert(data.message);
+        if (res.status === 201) setRedirect(true);
+      })
+      .catch((error) => console.log(error));
   };
+
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-900 to-90%">
@@ -38,7 +64,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  value={firstName}
+                  value={fname}
                   onChange={(e) => setFirstName(e.target.value)}
                   className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   placeholder="Enter your first name"
@@ -51,7 +77,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  value={lastName}
+                  value={lname}
                   onChange={(e) => setLastName(e.target.value)}
                   className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   placeholder="Enter your last name"

@@ -10,7 +10,7 @@ const CampaignSchema = new mongoose.Schema({
     required: true,
   },
   phone: {
-    type: Number,
+    type: String,
     required: [true, "Please provide Phone number"],
     minlength: 10,
     maxlength: 10,

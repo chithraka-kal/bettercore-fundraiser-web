@@ -8,7 +8,10 @@ const salt = bycrypt.genSaltSync(10);
 
 router.post("/register", async (req, res) => {
   try {
-    const { fname, lname, email, password, phone } = req.body;
+    const { fname, lname, email, password, phone, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
     await User.create({
       fname,
       lname,
@@ -20,8 +23,21 @@ router.post("/register", async (req, res) => {
     sendEmail(email, "Welcome to Hope Link", "Thank you for signing up!");
     res.status(201).json({ message: "user account created." });
   } catch (error) {
-    res.status(400).json({ message: error.message });
-    console.log("error");
+    if (error.name === "ValidationError") {
+      // Extract error messages from Mongoose validation errors
+      const errors = Object.values(error.errors).map((err) => err.message);
+      return res.status(400).json({ message: errors[0] });
+    }
+
+    // Handle duplicate key errors
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyValue)[0];
+      return res.status(400).json({ message: `${field} already exists.` });
+    }
+
+    // Other errors
+    res.status(400).json({ message: "An unexpected error occurred." });
+    console.log(error);
   }
 });
 
@@ -32,25 +48,28 @@ router.post("/login", async (req, res) => {
     const passOk = bycrypt.compareSync(password, user.password);
     if (passOk) {
       jwt.sign(
-        { email, id: user.id },
-        "asdjpoiacvnjianouqweru3094uqbpoaf34124",
+        { email, id: user._id },
+        "asdjpoiacvnjianouqweru3094uqbpoaf34124", //should be in .env
         {},
         (err, token) => {
           if (err) {
-            res.status(400).json("Failed to log in");
+            return res.status(400).json({ message: "Failed to log in" });
           } else {
-            res.cookie("token", token).json({
+            return res.cookie("token", token).json({
               id: user._id,
               email,
+              fname: user.fname,
+              lname: user.lname,
+              role: user.role,
             });
           }
         }
       );
     } else {
-      res.status(400).json("Failed to log in");
+      return res.status(400).json({ message: "Password is not correct" });
     }
   } else {
-    res.status(400).json("Account not found");
+    return res.status(400).json({ message: "Account not found" });
   }
 });
 

@@ -48,14 +48,14 @@ router.post("/login", async (req, res) => {
     const passOk = bycrypt.compareSync(password, user.password);
     if (passOk) {
       jwt.sign(
-        { email, id: user.id },
+        { email, id: user._id },
         "asdjpoiacvnjianouqweru3094uqbpoaf34124", //should be in .env
         {},
         (err, token) => {
           if (err) {
             return res.status(400).json({ message: "Failed to log in" });
           } else {
-            return res.cookie("token", token).status(200).json({
+            return res.cookie("token", token).json({
               id: user._id,
               email,
               fname: user.fname,

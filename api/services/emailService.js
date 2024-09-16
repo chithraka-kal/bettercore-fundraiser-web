@@ -11,13 +11,17 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendEmail(email, subject, text) {
-  await transporter.sendMail({
-    from: '"Hope Link" <servicehopelink@gmail.com>', // sender address
-    to: email, // list of receivers
-    subject: subject, // Subject line
-    text: text, // plain text body
-    //   html: "<b>Hello world?</b>", // html body
-  });
+  try {
+    await transporter.sendMail({
+      from: '"Hope Link" <servicehopelink@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: subject, // Subject line
+      text: text, // plain text body
+      //   html: "<b>Hello world?</b>", // html body
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = sendEmail;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import registerImage from "../assets/images/registerImage.jpg";
+import { server } from "../utils";
 
 const Register = () => {
   const [fname, setFirstName] = useState("");
@@ -13,7 +14,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/auth/register", {
+    const res = await fetch(server + "auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

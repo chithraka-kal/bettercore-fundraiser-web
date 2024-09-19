@@ -1,23 +1,48 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import facebookLogo from "../assets/images/facebook.png";
-import googleLogo from "../assets/images/google.png";
-import logo from "../assets/images/hopelink.png";
+import { Link, Navigate } from "react-router-dom";
 import registerImage from "../assets/images/registerImage.jpg";
+import { server } from "../utils";
 
 const Register = () => {
+  const [fname, setFirstName] = useState("");
+  const [lname, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
+    await fetch(server + "auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fname,
+        lname,
+        email,
+        phone,
+        password,
+        confirmPassword,
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        alert(data.message);
+        if (res.status === 201) setRedirect(true);
+      })
+      .catch((error) => console.log(error));
   };
+
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-900 to-90%">
-      <div className="flex flex-col w-full h-screen overflow-hidden bg-white rounded-none shadow-2xl md:flex-row ">
+      <div className="flex flex-col w-full h-screen overflow-hidden bg-white rounded-none shadow-2xl md:flex-row">
         <div className="hidden w-full md:block md:w-2/3">
           <img
             src={registerImage}
@@ -27,77 +52,102 @@ const Register = () => {
         </div>
 
         <div className="flex flex-col justify-center w-full h-full p-6 md:w-1/3">
-          <h2 className="mb-4 text-2xl font-bold text-center text-gray-800">
-            <img src={logo} width={250} className="m-auto my-2" alt="Logo" />
-            Register
+          <h2 className="mb-4 text-3xl font-bold text-center text-gray-800">
+            Create an Account
           </h2>
 
-          <button className="flex items-center justify-center w-full px-3 py-2 mb-2 text-white bg-black border border-gray-300 rounded-lg hover:bg-gray-700">
-            <img src={googleLogo} alt="Google logo" className="w-5 h-5 mr-2" />
-            Register with Google
-          </button>
-
-          <button className="flex items-center justify-center w-full px-3 py-2 mb-3 text-white bg-[#1877F2] border border-gray-300 rounded-lg hover:bg-white hover:text-black">
-            <img
-              src={facebookLogo}
-              alt="Facebook logo"
-              className="w-5 h-5 mr-2"
-            />
-            Register with Facebook
-          </button>
-
-          <div className="relative mb-4 text-center">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative px-2 text-gray-500 bg-white">or</div>
-          </div>
-
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+              <div className="mb-4">
+                <label className="block text-base font-semibold text-gray-800">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={fname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="Enter your first name"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-base font-semibold text-gray-800">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={lname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="Enter your last name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-base font-semibold text-gray-800">
                 Email
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="Enter your email"
                 required
               />
             </div>
+
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Password
+              <label className="block text-base font-semibold text-gray-800">
+                Phone
               </label>
               <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                placeholder="Enter your password"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                placeholder="Enter your phone number"
                 required
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                placeholder="Confirm your password"
-                required
-              />
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+              <div className="mb-4">
+                <label className="block text-base font-semibold text-gray-800">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-base font-semibold text-gray-800">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="Confirm your password"
+                  required
+                />
+              </div>
             </div>
+
             <button
               type="submit"
               className="w-full px-4 py-2 text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
             >
-              Register
+              Create an Account
             </button>
           </form>
 

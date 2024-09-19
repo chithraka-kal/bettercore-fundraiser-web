@@ -1,0 +1,80 @@
+const express = require("express");
+const User = require("../models/User");
+const router = express.Router();
+const bycrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const sendEmail = require("../services/emailService");
+const salt = bycrypt.genSaltSync(10);
+
+router.post("/register", async (req, res) => {
+  try {
+    const { fname, lname, email, password, phone, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+    await User.create({
+      fname,
+      lname,
+      email,
+      password: bycrypt.hashSync(password, salt),
+      phone,
+      role: "user",
+    });
+    sendEmail(email, "Welcome to Hope Link", "Thank you for signing up!");
+    res.status(201).json({ message: "user account created." });
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      // Extract error messages from Mongoose validation errors
+      const errors = Object.values(error.errors).map((err) => err.message);
+      return res.status(400).json({ message: errors[0] });
+    }
+
+    // Handle duplicate key errors
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyValue)[0];
+      return res.status(400).json({ message: `${field} already exists.` });
+    }
+
+    // Other errors
+    res.status(400).json({ message: "An unexpected error occurred." });
+    console.log(error);
+  }
+});
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (user) {
+    const passOk = bycrypt.compareSync(password, user.password);
+    if (passOk) {
+      jwt.sign(
+        { email, id: user._id },
+        "asdjpoiacvnjianouqweru3094uqbpoaf34124", //should be in .env
+        {},
+        (err, token) => {
+          if (err) {
+            return res.status(400).json({ message: "Failed to log in" });
+          } else {
+            return res.cookie("token", token).json({
+              id: user._id,
+              email,
+              fname: user.fname,
+              lname: user.lname,
+              role: user.role,
+            });
+          }
+        }
+      );
+    } else {
+      return res.status(400).json({ message: "Password is not correct" });
+    }
+  } else {
+    return res.status(400).json({ message: "Account not found" });
+  }
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token").json("Logged out");
+});
+
+module.exports = router;

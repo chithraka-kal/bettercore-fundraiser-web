@@ -3,6 +3,7 @@ import Layout from "./Components/Layout";
 import IndexPage from "./Pages/IndexPage";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import Campaigns from "./Pages/Campaigns";
 import { UserContextProvider } from "./context/UserContext";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<IndexPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/campaigns/create" element={<Campaigns />} />
         </Route>
       </Routes>
     </UserContextProvider>

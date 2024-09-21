@@ -27,11 +27,11 @@ function Campaigns() {
       data.set("swift", campaign.bankDetails.swiftCode);
       data.set("img", campaign.campaignImage);
       data.set("proof", campaign.proofLetter);
-      const res = await fetch(server + "campaign", {
+      await fetch(server + "campaign", {
         method: "POST",
         credentials: "include",
         body: data,
-      });
+      }).catch((e) => console.log(e));
       setCampaigns([...campaigns, campaign]);
     }
   };

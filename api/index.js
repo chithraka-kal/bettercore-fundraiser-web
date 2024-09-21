@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const fs = require("fs");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -11,6 +10,7 @@ dotenv.config();
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 //importing routes
 const authRoute = require("./routes/authRoute");

@@ -1,7 +1,6 @@
 const express = require("express");
 const { authenticateUser } = require("../middlewares/authentication");
 const router = express.Router();
-const User = require("../models/User");
 
 router.route("/").get(authenticateUser, async (req, res) => {
   return res.status(200).json({

@@ -42,15 +42,14 @@ const CampaignSchema = new mongoose.Schema({
   },
   acceptedAt: {
     type: Date,
-    default: Date.now,
   },
   holder: {
     type: String,
     required: [true, "Please provide a bank holder name"],
   },
-  bankNumber: {
+  bankName: {
     type: String,
-    required: [true, "Please provide a bank number"],
+    required: [true, "Please provide a bank name"],
   },
   accNumber: {
     type: String,

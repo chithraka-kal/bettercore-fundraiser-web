@@ -8,13 +8,13 @@ const fs = require("fs");
 const dotenv = require("dotenv");
 dotenv.config();
 
-//importing routes
-const authRoute = require("./routes/authRoute");
-const userRoute = require("./routes/userRoute");
-
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
+
+//importing routes
+const authRoute = require("./routes/authRoute");
+const userRoute = require("./routes/userRoute");
 
 //routes
 app.use("/auth", authRoute);

@@ -1,7 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import CampaignList from './CampaignList'
 
-const CampaignForm = ({ onSubmit, editCampaign }) => {
+
+function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [proofLetter, setProofLetter] = useState("");
@@ -16,6 +18,9 @@ const CampaignForm = ({ onSubmit, editCampaign }) => {
   //validations
   const [phoneError, setPhoneError] = useState(false);
   const [accountNumberError, setAccountNumberError] = useState(false);
+
+
+  
 
   const validatePhoneNumber = (phone) => {
     const phoneRegex = /^[0-9\b]{10}$/;
@@ -54,7 +59,7 @@ const CampaignForm = ({ onSubmit, editCampaign }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (!phoneError && !accountNumberError) {
     const campaign = {
       name,
       description,
@@ -70,7 +75,11 @@ const CampaignForm = ({ onSubmit, editCampaign }) => {
       phoneNumber,
     };
 
-    onSubmit(campaign);
+    if(onSubmit){
+      onSubmit(campaign);
+    }else{
+      console.log("No submit function provided");
+    }
 
     setName("");
     setDescription("");
@@ -82,15 +91,16 @@ const CampaignForm = ({ onSubmit, editCampaign }) => {
     setSwiftCode("");
     setCampaignImage("");
     setPhoneNumber("");
+  }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 my-10 bg-white rounded-lg shadow-2xl "
-    >
-      <h2 className="mb-4 text-xl font-semibold">Create New Campaign</h2>
-      {editCampaign ? "Edit Campaign" : "Create Campaign"}
+      className="p-6 m-12 my-10 bg-gray-100 rounded-lg shadow-2xl "
+     >
+      <h2 className="mb-4 text-xl font-semibold text-center">{editCampaign ? "Edit Campaign" : "Create New Campaign"}</h2>
+      
 
       {/* Name */}
       <div className="mb-4">
@@ -100,7 +110,7 @@ const CampaignForm = ({ onSubmit, editCampaign }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-lg"
-          placeholder="Campaign Title"
+          placeholder="Campaign Name"
         />
       </div>
 
@@ -242,7 +252,9 @@ const CampaignForm = ({ onSubmit, editCampaign }) => {
       >
         {editCampaign ? "Update Campaign" : "Create Campaign"}
       </button>
+      
     </form>
+          
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CampaignList = ({campaigns, onEdit, onDelete}) => {
+function CampaignList({campaigns, onEdit, onDelete}) {
   return (
     <div className="my-10">
       <h2 className="text-xl font-semibold">Campaign List</h2>
@@ -12,16 +12,9 @@ const CampaignList = ({campaigns, onEdit, onDelete}) => {
           >
             {/* Campaign Details */}
             <div className="flex flex-col space-y-2">
-              {/* Name */}
               <h3 className="text-lg font-semibold">Name: {campaign.name}</h3>
-
-              {/* Description */}
               <p className="">Description: {campaign.description}</p>
-
-              {/* Goal */}
               <p className="">Goal Amount: ${campaign.goal}</p>
-
-              {/* Proof Letter */}
               <p className="">
                 Proof Letter:{' '}
                 {campaign.proofLetter ? campaign.proofLetter.name : 'Not uploaded'}
@@ -37,18 +30,12 @@ const CampaignList = ({campaigns, onEdit, onDelete}) => {
                   <li>SWIFT Code: {campaign.bankDetails.swiftCode}</li>
                 </ul>
               </div>
-
-              {/* Campaign age */}
               <p>
                 Campaign Image:{' '}
                 {campaign.campaignImage ? campaign.campaignImage.name : 'Not uploaded'}
               </p>
-
-              {/* Phone Number */}
               <p>Phone Number:{campaign.phoneNumber}</p>
             </div>
-
-            {/* Action Buttons */}
             <div className="flex justify-end mt-4 space-x-4">
               <button
                 className="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-700"

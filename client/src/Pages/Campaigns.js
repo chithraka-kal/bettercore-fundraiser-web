@@ -1,63 +1,30 @@
 import React from "react";
-import CampaignList from "../Components/Campaign/CampaignList";
-import CampaignForm from "../Components/Campaign/CampaignForm";
-import { useState } from "react";
-import { server } from "../utils";
 
-function Campaigns() {
-  const [campaigns, setCampaigns] = useState([]);
-  const [campaignToEdit, setCampaignToEdit] = useState(null);
-
-  const addCampaign = async (campaign) => {
-    if (campaignToEdit !== null) {
-      const updateCampaigns = campaigns.map((c, index) =>
-        index === campaignToEdit ? campaign : c
-      );
-      setCampaigns(updateCampaigns);
-      setCampaignToEdit(null);
-    } else {
-      const data = new FormData();
-      data.set("name", campaign.name);
-      data.set("description", campaign.description);
-      data.set("phone", campaign.phoneNumber);
-      data.set("goal", campaign.goal);
-      data.set("holder", campaign.bankDetails.accountHolderName);
-      data.set("bankName", campaign.bankDetails.bankName);
-      data.set("accNumber", campaign.bankDetails.accountNumber);
-      data.set("swift", campaign.bankDetails.swiftCode);
-      data.set("img", campaign.campaignImage);
-      data.set("proof", campaign.proofLetter);
-      await fetch(server + "campaign", {
-        method: "POST",
-        credentials: "include",
-        body: data,
-      }).catch((e) => console.log(e));
-      setCampaigns([...campaigns, campaign]);
-    }
-  };
-
-  const editCampaign = (index) => {
-    setCampaignToEdit(index);
-  };
-
-  const deleteCampaign = (index) => {
-    const updateCampaigns = campaigns.filter((c, i) => i !== index);
-    setCampaigns(updateCampaigns);
-  };
-
+function Campaigns({campaigns}) {
   return (
-    <div className="container p-6 mx-auto">
-      <CampaignForm
-        onSubmit={addCampaign}
-        campaign={campaignToEdit !== null ? campaigns[campaignToEdit] : null}
-      />
-      <CampaignList
-        campaigns={campaigns}
-        onEdit={editCampaign}
-        onDelete={deleteCampaign}
-      />
+    <div className="my-10">
+      <h2 className="text-xl font-semibold">Campaign List</h2>
+      <ul className="space-y-4">
+        {campaigns && campaigns.length > 0 ? (
+          campaigns.map((campaign, index) => (
+            <li key={index} className="p-4 bg-white border rounded-lg shadow-lg">
+              <h3 className="text-lg font-bold">{campaign.name}</h3>
+              <p>{campaign.description}</p>
+              <p className="font-semibold">Goal: ${campaign.goal}</p>
+              <p className="text-gray-500">Contact: {campaign.phoneNumber}</p>
+              <button 
+              type="submit" 
+              className="px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-700">
+                Donate Now
+              </button>
+            </li>
+          ))
+        ) : (
+          <p>No campaigns available</p>
+        )}
+      </ul>
     </div>
   );
-}
+};
 
 export default Campaigns;

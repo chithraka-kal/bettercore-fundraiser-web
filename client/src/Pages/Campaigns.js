@@ -1,7 +1,6 @@
 import React from "react";
 
-
-function Campaigns({campaigns,onEdit,onCampaign}) {
+function Campaigns({campaigns}) {
   return (
     <div className="my-10">
       <h2 className="text-xl font-semibold">Campaign List</h2>

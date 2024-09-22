@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const CampaignSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Please provide a name"],
   },
   description: {
     type: String,
-    required: true,
+    required: [true, "Please provide a description"],
   },
   phone: {
     type: String,
@@ -17,15 +17,15 @@ const CampaignSchema = new mongoose.Schema({
   },
   img: {
     type: String,
-    required: true,
+    required: [true, "Please provide a image"],
   },
   proof: {
     type: String,
-    required: true,
+    required: [true, "Please provide a proof letter"],
   },
   goal: {
     type: mongoose.Schema.Types.Decimal128,
-    required: true,
+    required: [true, "Please provide a goal"],
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
@@ -39,6 +39,25 @@ const CampaignSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  acceptedAt: {
+    type: Date,
+  },
+  holder: {
+    type: String,
+    required: [true, "Please provide a bank holder name"],
+  },
+  bankName: {
+    type: String,
+    required: [true, "Please provide a bank name"],
+  },
+  accNumber: {
+    type: String,
+    required: [true, "Please provide a bank acc number"],
+  },
+  swift: {
+    type: String,
+    required: [true, "Please provide a swift code"],
   },
 });
 

@@ -1,23 +1,27 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 const authenticateUser = async (req, res, next) => {
   const { token } = req.cookies;
-  if (!token) {
-    console.log("Unauthorized");
-    return res.status(401).json({ message: "Unauthorized" });
+  if (token) {
+    var user = await getUser(token);
+    if (user) {
+      req.user = user;
+      return next();
+    }
   }
-  try {
-    const { id, email, role } = jwt.verify(
-      token,
-      "asdjpoiacvnjianouqweru3094uqbpoaf34124"
-    ); //should be in .env
-    req.user = { id, email, role };
-    next();
-  } catch (error) {
-    console.log(error);
-    return res.status(401).json({ message: "Unauthorized" });
-    
+  return res.status(401).json({ message: "Unauthorized" });
+};
+
+const checkIfAuthenticated = async (req, res, next) => {
+  const { token } = req.cookies;
+  if (token) {
+    var user = await getUser(token);
+    if (user) {
+      req.user = user;
+    }
   }
+  next();
 };
 
 const authorizePermission = (role) => {
@@ -27,6 +31,18 @@ const authorizePermission = (role) => {
     }
     next();
   };
+};
+
+const getUser = async (token) => {
+  try {
+    const { email } = jwt.verify(
+      token,
+      "asdjpoiacvnjianouqweru3094uqbpoaf34124"
+    ); //should be in .env
+    return await User.findOne({ email: email });
+  } catch (error) {
+    return null;
+  }
 };
 
 module.exports = { authenticateUser, authorizePermission };

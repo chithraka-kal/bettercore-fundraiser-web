@@ -5,6 +5,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Campaigns from "./Pages/Campaigns";
 import { UserContextProvider } from "./context/UserContext";
+import CampaignForm from "./Components/Campaign/CampaignForm";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
           <Route index element={<IndexPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/campaigns/create" element={<Campaigns />} />
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/campaigns/create" element={<CampaignForm />} />
         </Route>
       </Routes>
     </UserContextProvider>

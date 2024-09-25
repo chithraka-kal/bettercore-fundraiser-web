@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
       fname,
       lname,
       email,
-      password: bycrypt.hashSync(password, salt),
+      password: bcrypt.hashSync(password, salt),
       phone,
       role: "user",
     });

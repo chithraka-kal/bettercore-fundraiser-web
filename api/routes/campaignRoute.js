@@ -46,6 +46,53 @@ router.post(
   }
 );
 
+router.put(
+  "/",
+  authenticateUser,
+  uploadMiddleware.fields([
+    { name: "img", maxCount: 1 },
+    { name: "proof", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const img = req.files["img"] ? req.files["img"][0].filename : null;
+      const proof = req.files["proof"] ? req.files["proof"][0].filename : null;
+      const {
+        id,
+        name,
+        description,
+        phone,
+        goal,
+        holder,
+        bankName,
+        accNumber,
+        swift,
+      } = req.body;
+      const campaignDoc = await Campaign.findById(id);
+      if (!campaignDoc)
+        return res.status(404).send({ message: "Campaign not found" });
+
+      if (req.user.id != campaignDoc.createdBy)
+        return res.status(401).json({ message: "Unauthorized" });
+      await campaignDoc.updateOne({
+        name,
+        description,
+        phone,
+        goal,
+        holder,
+        bankName,
+        accNumber,
+        swift,
+        img: img || campaignDoc.img,
+        proof: proof || campaignDoc.proof,
+      });
+      res.status(201).json(campaignDoc);
+    } catch (e) {
+      res.status(400).json({ message: e.message });
+    }
+  }
+);
+
 router.get("/user/:id", authenticateUser, async (req, res) => {
   try {
     const { id } = req.params;

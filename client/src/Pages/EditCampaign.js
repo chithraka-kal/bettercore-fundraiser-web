@@ -6,6 +6,7 @@ function EditCampaign() {
   const { id } = useParams();
   const onSubmit = async (campaign) => {
     const data = new FormData();
+    data.set("id", id);
     data.set("name", campaign.name);
     data.set("description", campaign.description);
     data.set("phone", campaign.phoneNumber);
@@ -17,14 +18,18 @@ function EditCampaign() {
     data.set("img", campaign.campaignImage);
     data.set("proof", campaign.proofLetter);
     await fetch(server + "campaign", {
-      method: "POST",
+      method: "PUT",
       credentials: "include",
       body: data,
     })
-      .then(() => {
-        alert("Campaign created successfully");
+      .then((res) => {
+        if (res.status === 200) {
+          alert("Campaign updated successfully");
+        } else {
+          alert("Failed to update campaign");
+        }
       })
-      .catch((e) => alert("Failed to create campaign"));
+      .catch((e) => alert("Failed to update campaign"));
   };
 
   return (

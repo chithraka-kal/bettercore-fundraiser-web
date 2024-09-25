@@ -61,16 +61,18 @@ function CampaignForm({ onSubmit, editCampaign }) {
         console.log("No submit function provided");
       }
 
-      setName("");
-      setDescription("");
-      setProofLetter("");
-      setGoal("");
-      setAccountHolderName("");
-      setBankName("");
-      setAccountNumber("");
-      setSwiftCode("");
-      setCampaignImage("");
-      setPhoneNumber("");
+      if(!editCampaign){
+        setName("");
+        setDescription("");
+        setProofLetter("");
+        setGoal("");
+        setAccountHolderName("");
+        setBankName("");
+        setAccountNumber("");
+        setSwiftCode("");
+        setCampaignImage("");
+        setPhoneNumber("");
+      }
     }
   };
 

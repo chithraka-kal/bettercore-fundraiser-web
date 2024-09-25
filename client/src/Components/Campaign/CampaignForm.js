@@ -1,9 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import CampaignList from './CampaignList'
+import { useState } from "react";
 
-
-function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
+function CampaignForm({ onSubmit, editCampaign }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [proofLetter, setProofLetter] = useState("");
@@ -18,9 +16,6 @@ function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
   //validations
   const [phoneError, setPhoneError] = useState(false);
   const [accountNumberError, setAccountNumberError] = useState(false);
-
-
-  
 
   const validatePhoneNumber = (phone) => {
     const phoneRegex = /^[0-9\b]{10}$/;
@@ -42,65 +37,51 @@ function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
     }
   };
 
-  useEffect(() => {
-    if (editCampaign) {
-      setName(editCampaign.name || "");
-      setDescription(editCampaign.description || "");
-      setProofLetter(editCampaign.proofLetter || "");
-      setGoal(editCampaign.goal || "");
-      setAccountHolderName(editCampaign.bankDetails.accountHolderName || "");
-      setBankName(editCampaign.bankDetails.bankName || "");
-      setAccountNumber(editCampaign.bankDetails.accountNumber || "");
-      setSwiftCode(editCampaign.bankDetails.swiftCode || "");
-      setCampaignImage(editCampaign.campaignImage || "");
-      setPhoneNumber(editCampaign.phoneNumber || "");
-    }
-  }, [editCampaign]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!phoneError && !accountNumberError) {
-    const campaign = {
-      name,
-      description,
-      proofLetter,
-      goal,
-      bankDetails: {
-        accountHolderName,
-        bankName,
-        accountNumber,
-        swiftCode,
-      },
-      campaignImage,
-      phoneNumber,
-    };
+      const campaign = {
+        name,
+        description,
+        proofLetter,
+        goal,
+        bankDetails: {
+          accountHolderName,
+          bankName,
+          accountNumber,
+          swiftCode,
+        },
+        campaignImage,
+        phoneNumber,
+      };
 
-    if(onSubmit){
-      onSubmit(campaign);
-    }else{
-      console.log("No submit function provided");
+      if (onSubmit) {
+        onSubmit(campaign);
+      } else {
+        console.log("No submit function provided");
+      }
+
+      setName("");
+      setDescription("");
+      setProofLetter("");
+      setGoal("");
+      setAccountHolderName("");
+      setBankName("");
+      setAccountNumber("");
+      setSwiftCode("");
+      setCampaignImage("");
+      setPhoneNumber("");
     }
-
-    setName("");
-    setDescription("");
-    setProofLetter("");
-    setGoal("");
-    setAccountHolderName("");
-    setBankName("");
-    setAccountNumber("");
-    setSwiftCode("");
-    setCampaignImage("");
-    setPhoneNumber("");
-  }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
       className="p-6 m-12 my-10 bg-gray-100 rounded-lg shadow-2xl "
-     >
-      <h2 className="mb-4 text-xl font-semibold text-center">{editCampaign ? "Edit Campaign" : "Create New Campaign"}</h2>
-      
+    >
+      <h2 className="mb-4 text-xl font-semibold text-center">
+        {editCampaign ? "Edit Campaign" : "Create New Campaign"}
+      </h2>
 
       {/* Name */}
       <div className="mb-4">
@@ -252,10 +233,8 @@ function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
       >
         {editCampaign ? "Update Campaign" : "Create Campaign"}
       </button>
-      
     </form>
-          
   );
-};
+}
 
 export default CampaignForm;

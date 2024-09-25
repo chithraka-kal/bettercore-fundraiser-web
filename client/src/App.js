@@ -18,7 +18,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/campaigns/create" element={<CreateCampaign />} />
-          <Route path="/campaigns/edit" element={<EditCampaign />} />
+          <Route path="/campaigns/edit/:id" element={<EditCampaign />} />
         </Route>
       </Routes>
     </UserContextProvider>

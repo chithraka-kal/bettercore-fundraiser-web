@@ -46,4 +46,20 @@ router.post(
   }
 );
 
+router.get("/user/:id", authenticateUser, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const campaignDoc = await Campaign.findById(id);
+    if (!campaignDoc)
+      return res.status(404).send({ message: "Campaign not found" });
+
+    if (req.user.id != campaignDoc.createdBy)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    return res.status(200).json(campaignDoc);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+});
+
 export default router;

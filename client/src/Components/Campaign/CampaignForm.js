@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { server } from "../../utils";
 
 function CampaignForm({ onSubmit, editCampaign }) {
   const [name, setName] = useState("");
@@ -73,6 +73,30 @@ function CampaignForm({ onSubmit, editCampaign }) {
       setPhoneNumber("");
     }
   };
+
+  useEffect(() => {
+    if (editCampaign) {
+      fetch(server + `campaign/user/` + editCampaign, {
+        method: "GET",
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setName(data.name);
+          setDescription(data.description);
+          // setProofLetter(data.proof);
+          setGoal(data.goal.$numberDecimal);
+          setAccountHolderName(data.holder);
+          setBankName(data.bankName);
+          setAccountNumber(data.accNumber);
+          setSwiftCode(data.swift);
+          // setCampaignImage(data.img);
+          setPhoneNumber(data.phone);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, []);
 
   return (
     <form

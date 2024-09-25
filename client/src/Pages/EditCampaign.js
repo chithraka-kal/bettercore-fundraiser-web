@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CampaignForm from "../Components/Campaign/CampaignForm";
 import { server } from "../utils";
+import { useParams } from "react-router-dom";
 function EditCampaign() {
+  const { id } = useParams();
   const onSubmit = async (campaign) => {
     const data = new FormData();
     data.set("name", campaign.name);
@@ -24,9 +26,10 @@ function EditCampaign() {
       })
       .catch((e) => alert("Failed to create campaign"));
   };
+
   return (
     <div>
-      <CampaignForm onSubmit={onSubmit} editCampaign />
+      <CampaignForm onSubmit={onSubmit} editCampaign={id} />
     </div>
   );
 }

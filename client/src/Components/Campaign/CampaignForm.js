@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { server } from "../../utils";
-
+import { UserContext } from "../../context/UserContext";
+import { Navigate } from "react-router-dom";
 function CampaignForm({ onSubmit, editCampaign }) {
+  const { userInfo } = useContext(UserContext);
+  const [redirect, setRedirect] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [proofLetter, setProofLetter] = useState("");
@@ -61,7 +66,7 @@ function CampaignForm({ onSubmit, editCampaign }) {
         console.log("No submit function provided");
       }
 
-      if(!editCampaign){
+      if (!editCampaign) {
         setName("");
         setDescription("");
         setProofLetter("");
@@ -77,28 +82,45 @@ function CampaignForm({ onSubmit, editCampaign }) {
   };
 
   useEffect(() => {
-    if (editCampaign) {
-      fetch(server + `campaign/user/` + editCampaign, {
-        method: "GET",
-        credentials: "include",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setName(data.name);
-          setDescription(data.description);
-          // setProofLetter(data.proof);
-          setGoal(data.goal.$numberDecimal);
-          setAccountHolderName(data.holder);
-          setBankName(data.bankName);
-          setAccountNumber(data.accNumber);
-          setSwiftCode(data.swift);
-          // setCampaignImage(data.img);
-          setPhoneNumber(data.phone);
+    if (userInfo) {
+      if (editCampaign) {
+        fetch(server + `campaign/user/` + editCampaign, {
+          method: "GET",
+          credentials: "include",
         })
-        .catch((e) => console.log(e));
+          .then((res) => {
+            if (res.ok) {
+              res.json().then((data) => {
+                setName(data.name);
+                setDescription(data.description);
+                // setProofLetter(data.proof);
+                setGoal(data.goal.$numberDecimal);
+                setAccountHolderName(data.holder);
+                setBankName(data.bankName);
+                setAccountNumber(data.accNumber);
+                setSwiftCode(data.swift);
+                // setCampaignImage(data.img);
+                setPhoneNumber(data.phone);
+                setLoading(false);
+              });
+            } else {
+              setRedirect("/campaigns");
+            }
+          })
+          .catch((e) => console.log(e));
+      }
+    } else {
+      setRedirect("/login");
     }
   }, []);
+
+  if (redirect) {
+    return <Navigate to={redirect} />;
+  }
+
+  if (loading && editCampaign) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <form

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const CampaignSchema = new mongoose.Schema({
   name: {
@@ -61,4 +61,4 @@ const CampaignSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Campaign", CampaignSchema);
+export default mongoose.model("Campaign", CampaignSchema);

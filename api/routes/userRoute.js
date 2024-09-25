@@ -1,5 +1,6 @@
-const express = require("express");
-const { authenticateUser } = require("../middlewares/authentication");
+import express from "express";
+import { authenticateUser } from "../middlewares/authentication.js";
+
 const router = express.Router();
 
 router.route("/").get(authenticateUser, async (req, res) => {
@@ -12,4 +13,4 @@ router.route("/").get(authenticateUser, async (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

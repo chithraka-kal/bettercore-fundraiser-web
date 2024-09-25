@@ -1,7 +1,7 @@
 import React from "react";
 import CampaignForm from "../Components/Campaign/CampaignForm";
 import { server } from "../utils";
-function CreateCampaign() {
+function EditCampaign() {
   const onSubmit = async (campaign) => {
     const data = new FormData();
     data.set("name", campaign.name);
@@ -26,9 +26,9 @@ function CreateCampaign() {
   };
   return (
     <div>
-      <CampaignForm onSubmit={onSubmit} />
+      <CampaignForm onSubmit={onSubmit} editCampaign />
     </div>
   );
 }
 
-export default CreateCampaign;
+export default EditCampaign;

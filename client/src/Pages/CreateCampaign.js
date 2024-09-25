@@ -19,8 +19,12 @@ function CreateCampaign() {
       credentials: "include",
       body: data,
     })
-      .then(() => {
-        alert("Campaign created successfully");
+      .then((res) => {
+        if (res.status === 201) {
+          alert("Campaign created successfully");
+        } else {
+          alert("Failed to create campaign");
+        }
       })
       .catch((e) => alert("Failed to create campaign"));
   };

@@ -1,10 +1,11 @@
-const express = require("express");
-const User = require("../models/User");
+import express from "express";
+import User from "../models/User.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import sendEmail from "../services/emailService.js";
+
+const salt = bcrypt.genSaltSync(10);
 const router = express.Router();
-const bycrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const sendEmail = require("../services/emailService");
-const salt = bycrypt.genSaltSync(10);
 
 router.post("/register", async (req, res) => {
   try {
@@ -77,4 +78,4 @@ router.post("/logout", (req, res) => {
   res.clearCookie("token").json("Logged out");
 });
 
-module.exports = router;
+export default router;

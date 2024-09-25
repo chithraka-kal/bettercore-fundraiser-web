@@ -1,4 +1,5 @@
-const multer = require("multer");
+import multer from "multer";
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -9,6 +10,7 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${Math.floor(Math.random() * 100) + 1}.${ext}`); 
   },
 });
+
 const fileFilter = (req, file, cb) => {
   if (
     file.mimetype == "application/pdf" ||
@@ -21,6 +23,7 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
+
 const uploadMiddleware = multer({ storage: storage, fileFilter });
 
-module.exports = uploadMiddleware;
+export default uploadMiddleware;

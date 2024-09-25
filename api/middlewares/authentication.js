@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 const authenticateUser = async (req, res, next) => {
   const { token } = req.cookies;
@@ -45,4 +45,4 @@ const getUser = async (token) => {
   }
 };
 
-module.exports = { authenticateUser, authorizePermission };
+export { authenticateUser, authorizePermission };

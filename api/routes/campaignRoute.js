@@ -1,9 +1,10 @@
-const express = require("express");
-const { authenticateUser } = require("../middlewares/authentication");
-const uploadMiddleware = require("../middlewares/uploadMiddleware");
-const saveFile = require("../services/fileService");
+import express from "express";
+import { authenticateUser } from "../middlewares/authentication.js";
+import uploadMiddleware from "../middlewares/uploadMiddleware.js";
+import Campaign from "../models/Campaign.js";
+
 const router = express.Router();
-const Campaign = require("../models/Campaign");
+
 router.post(
   "/",
   authenticateUser,
@@ -13,7 +14,7 @@ router.post(
   ]),
   async (req, res) => {
     try {
-      const img = req.files['img'][0].filename;
+      const img = req.files["img"][0].filename;
       const proof = req.files["proof"][0].filename;
       const {
         name,
@@ -45,4 +46,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;

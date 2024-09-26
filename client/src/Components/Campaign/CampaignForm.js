@@ -1,9 +1,12 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import CampaignList from './CampaignList'
+import React, { useState, useEffect, useContext } from "react";
+import { server } from "../../utils";
+import { UserContext } from "../../context/UserContext";
+import { Navigate } from "react-router-dom";
+function CampaignForm({ onSubmit, editCampaign }) {
+  const { userInfo } = useContext(UserContext);
+  const [redirect, setRedirect] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-
-function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [proofLetter, setProofLetter] = useState("");
@@ -18,9 +21,6 @@ function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
   //validations
   const [phoneError, setPhoneError] = useState(false);
   const [accountNumberError, setAccountNumberError] = useState(false);
-
-
-  
 
   const validatePhoneNumber = (phone) => {
     const phoneRegex = /^[0-9\b]{10}$/;
@@ -42,65 +42,94 @@ function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
     }
   };
 
-  useEffect(() => {
-    if (editCampaign) {
-      setName(editCampaign.name || "");
-      setDescription(editCampaign.description || "");
-      setProofLetter(editCampaign.proofLetter || "");
-      setGoal(editCampaign.goal || "");
-      setAccountHolderName(editCampaign.bankDetails.accountHolderName || "");
-      setBankName(editCampaign.bankDetails.bankName || "");
-      setAccountNumber(editCampaign.bankDetails.accountNumber || "");
-      setSwiftCode(editCampaign.bankDetails.swiftCode || "");
-      setCampaignImage(editCampaign.campaignImage || "");
-      setPhoneNumber(editCampaign.phoneNumber || "");
-    }
-  }, [editCampaign]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!phoneError && !accountNumberError) {
-    const campaign = {
-      name,
-      description,
-      proofLetter,
-      goal,
-      bankDetails: {
-        accountHolderName,
-        bankName,
-        accountNumber,
-        swiftCode,
-      },
-      campaignImage,
-      phoneNumber,
-    };
+      const campaign = {
+        name,
+        description,
+        proofLetter,
+        goal,
+        bankDetails: {
+          accountHolderName,
+          bankName,
+          accountNumber,
+          swiftCode,
+        },
+        campaignImage,
+        phoneNumber,
+      };
 
-    if(onSubmit){
-      onSubmit(campaign);
-    }else{
-      console.log("No submit function provided");
+      if (onSubmit) {
+        onSubmit(campaign);
+      } else {
+        console.log("No submit function provided");
+      }
+
+      if (!editCampaign) {
+        setName("");
+        setDescription("");
+        setProofLetter("");
+        setGoal("");
+        setAccountHolderName("");
+        setBankName("");
+        setAccountNumber("");
+        setSwiftCode("");
+        setCampaignImage("");
+        setPhoneNumber("");
+      }
     }
-
-    setName("");
-    setDescription("");
-    setProofLetter("");
-    setGoal("");
-    setAccountHolderName("");
-    setBankName("");
-    setAccountNumber("");
-    setSwiftCode("");
-    setCampaignImage("");
-    setPhoneNumber("");
-  }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      if (editCampaign) {
+        fetch(server + `campaign/user/` + editCampaign, {
+          method: "GET",
+          credentials: "include",
+        })
+          .then((res) => {
+            if (res.ok) {
+              res.json().then((data) => {
+                setName(data.name);
+                setDescription(data.description);
+                // setProofLetter(data.proof);
+                setGoal(data.goal.$numberDecimal);
+                setAccountHolderName(data.holder);
+                setBankName(data.bankName);
+                setAccountNumber(data.accNumber);
+                setSwiftCode(data.swift);
+                // setCampaignImage(data.img);
+                setPhoneNumber(data.phone);
+                setLoading(false);
+              });
+            } else {
+              setRedirect("/campaigns");
+            }
+          })
+          .catch((e) => console.log(e));
+      }
+    } else {
+      setRedirect("/login");
+    }
+  }, []);
+
+  if (redirect) {
+    return <Navigate to={redirect} />;
+  }
+
+  if (loading && editCampaign) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <form
       onSubmit={handleSubmit}
       className="p-6 m-12 my-10 bg-gray-100 rounded-lg shadow-2xl "
-     >
-      <h2 className="mb-4 text-xl font-semibold text-center">{editCampaign ? "Edit Campaign" : "Create New Campaign"}</h2>
-      
+    >
+      <h2 className="mb-4 text-xl font-semibold text-center">
+        {editCampaign ? "Edit Campaign" : "Create New Campaign"}
+      </h2>
 
       {/* Name */}
       <div className="mb-4">
@@ -252,10 +281,8 @@ function CampaignForm  ({ onSubmit, editCampaign,campaigns,deleteCampaign }) {
       >
         {editCampaign ? "Update Campaign" : "Create Campaign"}
       </button>
-      
     </form>
-          
   );
-};
+}
 
 export default CampaignForm;

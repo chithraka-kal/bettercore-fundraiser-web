@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
       fname,
       lname,
       email,
-      password: bycrypt.hashSync(password, salt),
+      password: bcrypt.hashSync(password, salt),
       phone,
       role: "user",
     });
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
-    const passOk = bycrypt.compareSync(password, user.password);
+    const passOk = bcrypt.compareSync(password, user.password);
     if (passOk) {
       jwt.sign(
         { email, id: user._id },

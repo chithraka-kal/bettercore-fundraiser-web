@@ -9,6 +9,8 @@ import CreateCampaign from "./Pages/CreateCampaign";
 import EditCampaign from "./Pages/EditCampaign";
 import MyCampaigns from "./Pages/MyCampaigns";
 
+import AboutUs from "./Pages/AboutUs";
+
 function App() {
   return (
     <UserContextProvider>
@@ -21,6 +23,7 @@ function App() {
           <Route path="/campaigns/create" element={<CreateCampaign />} />
           <Route path="/campaigns/edit/:id" element={<EditCampaign />} />
           <Route path="/campaigns/mycampaigns" element={<MyCampaigns/>}/>
+          <Route path="/about-us" element={<AboutUs/>}/>
         </Route>
       </Routes>
     </UserContextProvider>

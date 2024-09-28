@@ -93,6 +93,25 @@ router.put(
   }
 );
 
+router.get("/user", authenticateUser, async (req, res) => {
+  try {
+    const campaigns = await Campaign.find({ createdBy: req.user._id });
+    const list = campaigns.map((campaign) => {
+      const date = new Date(campaign.createdAt);
+      return {
+        id: campaign._id,
+        name: campaign.name,
+        created: date.toDateString(),
+        phone: campaign.phone,
+        goal: campaign.goal,
+      };
+    });
+    res.status(200).json(list);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+});
+
 router.get("/user/:id", authenticateUser, async (req, res) => {
   try {
     const { id } = req.params;
@@ -104,6 +123,21 @@ router.get("/user/:id", authenticateUser, async (req, res) => {
       return res.status(401).json({ message: "Unauthorized" });
 
     return res.status(200).json(campaignDoc);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+});
+
+router.delete("/:id", authenticateUser, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const campaignDoc = await Campaign.findById(id);
+    if (!campaignDoc)
+      return res.status(404).send({ message: "Campaign not found" });
+    if(req.user.id != campaignDoc.createdBy)
+      return res.status(401).json({ message: "Unauthorized" });
+    await campaignDoc.deleteOne();
+    return res.status(200).json({ message: "Campaign deleted" });
   } catch (e) {
     res.status(400).json({ message: e.message });
   }

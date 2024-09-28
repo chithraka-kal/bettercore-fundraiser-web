@@ -1,8 +1,8 @@
 import React from 'react';
-import listIcon1 from '../assets/img/listico1.png';
-import listIcon2 from '../assets/img/listico2.png';
-import listIcon3 from '../assets/img/listco3.png';
-import frame2 from '../assets/img/Frame2.png';
+import listIcon1 from '../assets/images/listico1.png';
+import listIcon2 from '../assets/images/listico2.png';
+import listIcon3 from '../assets/images/listco3.png';
+import frame2 from '../assets/images/Frame2.png';
 
 const Feature = ({ imgSrc, title, description }) => (
   <div className="feature-item">

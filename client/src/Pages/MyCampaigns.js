@@ -40,7 +40,7 @@ function MyCampaigns() {
                 <div className="flex justify-end gap-4">
                   <Link
                     className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700"
-                    to={`/campaigns/my/edit/${index}`}
+                    to={`/campaigns/my/edit/${campaign.id}`}
                   >
                     Edit
                   </Link>

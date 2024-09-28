@@ -1,35 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { server } from "../utils";
 
 function MyCampaigns() {
-  const [campaigns, setCampaigns] = useState([
-    {
-      name: "Help for Flood Victims",
-      description:
-        "A campaign to provide relief for those affected by the recent floods.",
-      goal: 10000,
-      phoneNumber: "1234567890",
-    },
-    {
-      name: "Support Local Schools",
-      description:
-        "Raising funds to improve the infrastructure of local schools.",
-      goal: 5000,
-      phoneNumber: "0987654321",
-    },
-  ]);
+  const [campaigns, setCampaigns] = useState([]);
 
-  const [campaignToEdit, setCampaignToEdit] = useState(null);
+  useEffect(() => {
+    fetch(server + "campaign/user", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCampaigns(data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
-  const editCampaign = (index) => {
-    setCampaignToEdit(index);
-  };
-
-  const deleteCampaign = (index) => {
-    const updateCampaigns = campaigns.filter((c, i) => i !== index);
-    setCampaigns(updateCampaigns);
-  };
   return (
     <div className="my-10 px-6">
       <div>
@@ -38,16 +26,16 @@ function MyCampaigns() {
           {campaigns && campaigns.length > 0 ? (
             campaigns.map((campaign, index) => (
               <li
-                key={index}
+                key={campaign.id}
                 className="p-4 bg-white border rounded-lg hover:shadow-lg duration-300 flex justify-between items-end"
               >
                 <div>
                   <h3 className="text-lg font-bold">{campaign.name}</h3>
-                  <p>{campaign.description}</p>
-                  <p className="font-semibold">Goal: ${campaign.goal}</p>
-                  <p className="text-gray-500">
-                    Contact: {campaign.phoneNumber}
+                  <p>{campaign.created}</p>
+                  <p className="font-semibold">
+                    Goal: ${campaign.goal.$numberDecimal}
                   </p>
+                  <p className="text-gray-500">Contact: {campaign.phone}</p>
                 </div>
                 <div className="flex justify-end gap-4">
                   <Link

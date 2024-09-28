@@ -93,6 +93,25 @@ router.put(
   }
 );
 
+router.get("/user", authenticateUser, async (req, res) => {
+  try {
+    const campaigns = await Campaign.find({ createdBy: req.user._id });
+    const list = campaigns.map((campaign) => {
+      const date = new Date(campaign.createdAt);
+      return {
+        id: campaign._id,
+        name: campaign.name,
+        created: date.toDateString(),
+        phone: campaign.phone,
+        goal: campaign.goal,
+      };
+    });
+    res.status(200).json(list);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+});
+
 router.get("/user/:id", authenticateUser, async (req, res) => {
   try {
     const { id } = req.params;

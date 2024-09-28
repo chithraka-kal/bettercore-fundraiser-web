@@ -6,6 +6,27 @@ import { server } from "../utils";
 function MyCampaigns() {
   const [campaigns, setCampaigns] = useState([]);
 
+  const deleteCampaign = async (id) => {
+    const res = window.confirm(
+      "Are you sure you want to delete this campaign?"
+    );
+    if (res) {
+      fetch(server + "campaign/" + id, {
+        method: "DELETE",
+        credentials: "include",
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            const updatedCampaigns = campaigns.filter(
+              (campaign) => campaign.id !== id
+            );
+            setCampaigns(updatedCampaigns);
+          }
+        })
+        .catch((e) => console.log(e));
+    }
+  };
+
   useEffect(() => {
     fetch(server + "campaign/user", {
       method: "GET",
@@ -44,12 +65,13 @@ function MyCampaigns() {
                   >
                     Edit
                   </Link>
-                  <Link
+
+                  <button
+                    onClick={() => deleteCampaign(campaign.id)}
                     className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-700"
-                    to={`/campaigns/my/edit/${index}`}
                   >
                     Delete
-                  </Link>
+                  </button>
                 </div>
               </li>
             ))

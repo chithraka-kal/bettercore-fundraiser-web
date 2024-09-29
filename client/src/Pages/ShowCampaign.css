@@ -1,0 +1,154 @@
+@media only screen and (max-width: 767px) {
+  .cantainer {
+    height: 800px;
+  }
+  .inner_OuterDiv {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .innerLeft {
+    height: 100px;
+  }
+}
+.cantainer {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.inner_OuterDiv {
+  /* border: 1px solid red; */
+  height: 90%;
+  width: 70%;
+  display: flex;
+}
+.inner_element {
+  /* border: 1px solid red; */
+  flex: 1;
+}
+.innerLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.left_elements {
+  width: 90%;
+  /* border: 1px solid red; */
+}
+.left_top {
+  height: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left_Bottom {
+  height: 20%;
+}
+.image {
+  scale: 1.4;
+  /* border: 1px solid red; */
+  align-self: center;
+  height: 40vh;
+  width: 65%;
+  background-image: url(../assets/images/CharityCampain.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Right-Up {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+  justify-content: center;
+  flex-direction: column;
+}
+.Right-Up h1 {
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.Right-Up h4 {
+  font-size: 12px;
+  font-weight: 400;
+}
+.innerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Right-Up p {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 5px;
+}
+.Right-Middle {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.icons {
+  height: 33px;
+  width: 33px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 1s;
+}
+.icons:hover {
+  height: 35px;
+  width: 35px;
+}
+.Donate_element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Donate_element {
+  border: 1px solid green;
+  padding: 13px 20px;
+  border-radius: 10px;
+  color: white;
+  background-color: green;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3); /* subtle shadow */
+}
+
+.Donate_element:hover {
+  background-color: #28a745; /* brighter green on hover */
+  transform: translateY(-3px); /* small lift effect */
+  box-shadow: 0 8px 12px rgba(0, 128, 0, 0.4); /* deeper shadow */
+}
+
+.Donate_element:active {
+  transform: translateY(0); /* reset button on click */
+  box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* subtle shadow on click */
+}
+
+form input {
+  border: 1px solid gray;
+}
+.donate_Form {
+  margin-top: 0;
+  position: relative;
+
+  width: 300px;
+}
+
+.formdiv {
+  /* border: 1px solid red; */
+  margin: 0;
+  padding: 0;
+}
+
+.inputField:focus {
+  border: none;
+}

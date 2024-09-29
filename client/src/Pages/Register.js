@@ -41,7 +41,7 @@ const Register = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-purple-900 to-90%">
+    <div className="flex items-center justify-center min-h-screen  to-90%">
       <div className="flex flex-col w-full h-screen overflow-hidden bg-white rounded-none shadow-2xl md:flex-row">
         <div className="hidden w-full md:block md:w-2/3">
           <img
@@ -66,7 +66,7 @@ const Register = () => {
                   type="text"
                   value={fname}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   placeholder="Enter your first name"
                   required
                 />
@@ -79,7 +79,7 @@ const Register = () => {
                   type="text"
                   value={lname}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   placeholder="Enter your last name"
                   required
                 />
@@ -94,7 +94,7 @@ const Register = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 placeholder="Enter your email"
                 required
               />
@@ -108,7 +108,7 @@ const Register = () => {
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 placeholder="Enter your phone number"
                 required
               />
@@ -123,7 +123,7 @@ const Register = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   placeholder="Enter your password"
                   required
                 />
@@ -136,7 +136,7 @@ const Register = () => {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   placeholder="Confirm your password"
                   required
                 />
@@ -145,7 +145,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full px-4 py-2 text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+              className="w-full px-4 py-2 text-white bg-red-600 rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
             >
               Create an Account
             </button>
@@ -156,7 +156,7 @@ const Register = () => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-semibold text-indigo-600 transition-colors duration-200 hover:text-indigo-800"
+                className="font-semibold text-red-600 transition-colors duration-200 hover:text-red-800"
               >
                 Sign in
               </Link>

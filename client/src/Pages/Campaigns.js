@@ -9,7 +9,7 @@ function Campaigns({ campaign }) {
       description:
         "A campaign to provide relief for those affected by the recent floods.",
       goal: 10000,
-      raised: 5000, // Add a 'raised' amount for progress visualization
+      raised: 5000,
       phoneNumber: "1234567890",
     },
     {

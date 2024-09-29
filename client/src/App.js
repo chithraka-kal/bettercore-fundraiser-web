@@ -1,14 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
-import IndexPage from "./Pages/IndexPage";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import Campaigns from "./Pages/Campaigns";
 import { UserContextProvider } from "./context/UserContext";
+import Campaigns from "./Pages/Campaigns";
 import CreateCampaign from "./Pages/CreateCampaign";
 import EditCampaign from "./Pages/EditCampaign";
+import IndexPage from "./Pages/IndexPage";
+import Login from "./Pages/Login";
 import MyCampaigns from "./Pages/MyCampaigns";
+import Register from "./Pages/Register";
 
+import AdminDashboard from "./Components/admin/AdminDashboard";
+import EditUser from "./Components/admin/EditUser";
+import ManageCampaign from "./Components/admin/ManageCampaign";
+import ManageUsers from "./Components/admin/ManageUsers";
 import AboutUs from "./Pages/AboutUs";
 
 function App() {
@@ -23,7 +27,12 @@ function App() {
           <Route path="/campaigns/my" element={<MyCampaigns />} />
           <Route path="/campaigns/my/create" element={<CreateCampaign />} />
           <Route path="/campaigns/my/edit/:id" element={<EditCampaign />} />
-          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/admin/*" element={<AdminDashboard />}>
+            <Route path="manage-campaigns" element={<ManageCampaign />} />
+            <Route path="manage-users" element={<ManageUsers />} />
+            <Route path="edit-user/:userId" element={<EditUser />} />
+          </Route>
         </Route>
       </Routes>
     </UserContextProvider>

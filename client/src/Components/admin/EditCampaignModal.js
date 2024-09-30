@@ -25,7 +25,7 @@ const EditCampaignModal = ({ isOpen, onClose, campaign, onSave }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Edit Campaign"
-      className="max-w-lg p-6 mx-auto mt-20 bg-white rounded-lg shadow-lg"
+      className="w-1/3 p-6 mx-auto mt-20 bg-white rounded-lg shadow-lg"
       overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
     >
       <h2 className="mb-4 text-2xl font-bold text-red-600">Edit Campaign</h2>

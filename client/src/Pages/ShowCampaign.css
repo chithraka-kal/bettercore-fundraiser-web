@@ -1,25 +1,73 @@
 @media only screen and (max-width: 767px) {
-  .cantainer {
-    height: 800px;
-  }
   .inner_OuterDiv {
     flex-direction: column;
     justify-content: center;
   }
+  .inner_OuterDiv {
+    height: 100% !important;
+
+    position: relative;
+  }
   .innerLeft {
-    height: 100px;
+    height: 50 !important;
+  }
+  .inner_element {
+    flex: 1 !important;
+  }
+
+  .image {
+    height: 40vh !important;
+    width: 100% !important;
+    background-size: cover !important;
+  }
+  .cantainer {
+    overflow: hidden;
+  }
+  .innerLeft {
+    height: 500px;
+  }
+
+  .CampName {
+    font-size: 25px !important;
+  }
+
+  .Right-Up h4 {
+    font-size: 12px !important;
+    font-weight: 400;
+  }
+  .Right-Up p {
+    font-size: small !important;
   }
 }
+@media only screen and (max-width: 1200px) {
+  .CampName {
+    font-size: 30px !important;
+  }
+
+  .Right-Up h4 {
+    font-size: 18px !important;
+  }
+  .Right-Up p {
+    font-size: 12px !important;
+  }
+  .progress_details {
+    font-size: 25px !important;
+  }
+}
+
 .cantainer {
-  min-width: 400px;
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .inner_OuterDiv {
+  position: relative;
+
   /* border: 1px solid red; */
-  height: 90%;
+  height: 100%;
   width: 70%;
   display: flex;
 }
@@ -35,26 +83,37 @@
 }
 .left_elements {
   width: 90%;
+
   /* border: 1px solid red; */
 }
 .left_top {
-  height: 75%;
+  position: relative;
+  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 2;
 }
 .left_Bottom {
+  margin-top: 10px;
   height: 20%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 .image {
-  scale: 1.4;
+  position: relative;
   /* border: 1px solid red; */
   align-self: center;
-  height: 40vh;
-  width: 65%;
+  height: 100%;
+  width: 100%;
   background-image: url(../assets/images/CharityCampain.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: 0px;
 }
 .Right-Up {
   padding: 10px;
@@ -64,13 +123,13 @@
   justify-content: center;
   flex-direction: column;
 }
-.Right-Up h1 {
-  font-size: 23px;
+.CampName {
+  font-size: 45px;
   font-weight: 600;
   margin-bottom: 5px;
 }
 .Right-Up h4 {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 400;
 }
 .innerRight {
@@ -80,7 +139,7 @@
 }
 .Right-Up p {
   text-align: center;
-  font-size: 10px;
+  font-size: 16px;
   margin-top: 5px;
 }
 .Right-Middle {
@@ -90,8 +149,8 @@
 }
 
 .icons {
-  height: 33px;
-  width: 33px;
+  height: 50px;
+  width: 50px;
   /* border: 1px solid red; */
   display: flex;
   align-items: center;
@@ -137,10 +196,10 @@ form input {
   border: 1px solid gray;
 }
 .donate_Form {
-  margin-top: 0;
+  margin-top: 10%;
   position: relative;
-
-  width: 300px;
+  width: 80%;
+  height: 100%;
 }
 
 .formdiv {
@@ -151,4 +210,22 @@ form input {
 
 .inputField:focus {
   border: none;
+}
+input_outer {
+  width: 50%;
+}
+
+.progress {
+  width: 20rem;
+  height: 1.5rem;
+  border-radius: 50px;
+  margin-top: 10px;
+  border: 1px solid green;
+}
+
+.progress_details {
+  font-size: 30px;
+  margin-top: 10px;
+  align-items: center;
+  text-align: center;
 }

@@ -23,7 +23,7 @@ function Header() {
   );
 }
 
-// Integrating your components as part of the landing page or wherever you want to place them.
+
 function LandingPage() {
   return (
     <div className="LandingPage">
@@ -38,7 +38,7 @@ function LandingPage() {
   );
 }
 
-// Then export the main component combining both
+
 function MainPage() {
   return (
     <>

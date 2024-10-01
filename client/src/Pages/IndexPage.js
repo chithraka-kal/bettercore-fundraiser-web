@@ -9,22 +9,7 @@ import Banner from '../Components/Banner.js';
 import GetStarted from '../Components/GetStarted.js';
 import '../css/LandingPage.css';
 
-function Header() {
-  const { userInfo } = useContext(UserContext);
-  return (
-    <div>
-      <h1>Index Page Working!</h1>
-      <h2>
-        {userInfo
-          ? `Welcome ${userInfo.fname} ${userInfo.lname}`
-          : "Welcome Guest"}
-      </h2>
-    </div>
-  );
-}
-
-
-function LandingPage() {
+export default function IndexPage() {
   return (
     <div className="LandingPage">
       <Hero />
@@ -37,15 +22,3 @@ function LandingPage() {
     </div>
   );
 }
-
-
-function MainPage() {
-  return (
-    <>
-      <Header />
-      <LandingPage />
-    </>
-  );
-}
-
-export default MainPage;

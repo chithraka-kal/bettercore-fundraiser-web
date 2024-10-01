@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import loginImage from "../assets/images/loginImage.jpg";
-import { server } from "../utils";
 import { UserContext } from "../context/UserContext";
+import { server } from "../utils";
+
 const Login = () => {
   const { setUserInfo } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetch(server + "auth/login", {
@@ -42,7 +44,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-purple-900 to-purple-600">
+    <div className="flex min-h-screen">
       <div className="flex flex-col w-full h-screen overflow-hidden bg-white rounded-none shadow-2xl md:flex-row ">
         <div className="flex flex-col justify-center w-full p-6 md:w-1/3">
           <p className="mb-6 text-3xl font-bold text-center text-gray-800">
@@ -58,7 +60,7 @@ const Login = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 placeholder="Enter your email"
                 required
               />
@@ -72,7 +74,7 @@ const Login = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="block w-full px-4 py-2 mt-2 text-gray-800 placeholder-gray-400 transition-all duration-300 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 placeholder="Enter your password"
                 required
               />
@@ -80,7 +82,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full px-5 py-3 text-white transition-transform transform bg-indigo-600 rounded-md shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 "
+              className="w-full px-5 py-3 text-white transition-transform transform bg-red-600 rounded-md shadow-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 "
             >
               Sign In
             </button>
@@ -91,7 +93,7 @@ const Login = () => {
               Don’t have an account?{" "}
               <Link
                 to="/register"
-                className="font-semibold text-indigo-600 transition-colors duration-200 hover:text-indigo-800"
+                className="font-semibold text-red-600 transition-colors duration-200 hover:text-red-800"
               >
                 Sign up
               </Link>

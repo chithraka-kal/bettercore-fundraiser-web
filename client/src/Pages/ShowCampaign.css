@@ -1,0 +1,231 @@
+@media only screen and (max-width: 767px) {
+  .inner_OuterDiv {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .inner_OuterDiv {
+    height: 100% !important;
+
+    position: relative;
+  }
+  .innerLeft {
+    height: 50 !important;
+  }
+  .inner_element {
+    flex: 1 !important;
+  }
+
+  .image {
+    height: 40vh !important;
+    width: 100% !important;
+    background-size: cover !important;
+  }
+  .cantainer {
+    overflow: hidden;
+  }
+  .innerLeft {
+    height: 500px;
+  }
+
+  .CampName {
+    font-size: 25px !important;
+  }
+
+  .Right-Up h4 {
+    font-size: 12px !important;
+    font-weight: 400;
+  }
+  .Right-Up p {
+    font-size: small !important;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .CampName {
+    font-size: 30px !important;
+  }
+
+  .Right-Up h4 {
+    font-size: 18px !important;
+  }
+  .Right-Up p {
+    font-size: 12px !important;
+  }
+  .progress_details {
+    font-size: 25px !important;
+  }
+}
+
+.cantainer {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.inner_OuterDiv {
+  position: relative;
+
+  /* border: 1px solid red; */
+  height: 100%;
+  width: 70%;
+  display: flex;
+}
+.inner_element {
+  /* border: 1px solid red; */
+  flex: 1;
+}
+.innerLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.left_elements {
+  width: 90%;
+
+  /* border: 1px solid red; */
+}
+.left_top {
+  position: relative;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+}
+.left_Bottom {
+  margin-top: 10px;
+  height: 20%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.image {
+  position: relative;
+  /* border: 1px solid red; */
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  background-image: url(../assets/images/CharityCampain.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: 0px;
+}
+.Right-Up {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+  justify-content: center;
+  flex-direction: column;
+}
+.CampName {
+  font-size: 45px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.Right-Up h4 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.innerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Right-Up p {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.Right-Middle {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.icons {
+  height: 50px;
+  width: 50px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 1s;
+}
+.icons:hover {
+  height: 35px;
+  width: 35px;
+}
+.Donate_element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Donate_element {
+  border: 1px solid green;
+  padding: 13px 20px;
+  border-radius: 10px;
+  color: white;
+  background-color: green;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3); /* subtle shadow */
+}
+
+.Donate_element:hover {
+  background-color: #28a745; /* brighter green on hover */
+  transform: translateY(-3px); /* small lift effect */
+  box-shadow: 0 8px 12px rgba(0, 128, 0, 0.4); /* deeper shadow */
+}
+
+.Donate_element:active {
+  transform: translateY(0); /* reset button on click */
+  box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* subtle shadow on click */
+}
+
+form input {
+  border: 1px solid gray;
+}
+.donate_Form {
+  margin-top: 10%;
+  position: relative;
+  width: 80%;
+  height: 100%;
+}
+
+.formdiv {
+  /* border: 1px solid red; */
+  margin: 0;
+  padding: 0;
+}
+
+.inputField:focus {
+  border: none;
+}
+input_outer {
+  width: 50%;
+}
+
+.progress {
+  width: 20rem;
+  height: 1.5rem;
+  border-radius: 50px;
+  margin-top: 10px;
+  border: 1px solid green;
+}
+
+.progress_details {
+  font-size: 30px;
+  margin-top: 10px;
+  align-items: center;
+  text-align: center;
+}

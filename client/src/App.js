@@ -10,7 +10,6 @@ import MyCampaigns from "./Pages/MyCampaigns";
 import ShowCampaign from "./Pages/ShowCampaign";
 import Register from "./Pages/Register";
 
-
 import AdminDashboard from "./Components/admin/AdminDashboard";
 import ManageCampaign from "./Components/admin/ManageCampaign";
 import ManageUsers from "./Components/admin/ManageUsers";
@@ -25,14 +24,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/campaigns/:id" element={<ShowCampaign />} />
           <Route path="/campaigns/my" element={<MyCampaigns />} />
           <Route path="/campaigns/my/create" element={<CreateCampaign />} />
           <Route path="/campaigns/my/edit/:id" element={<EditCampaign />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/ShowCampain" element={<ShowCampaign />} />
           <Route path="/admin/*" element={<AdminDashboard />}>
-          <Route path="manage-campaigns" element={<ManageCampaign />} />
-          <Route path="manage-users" element={<ManageUsers />} />
+            <Route path="manage-campaigns" element={<ManageCampaign />} />
+            <Route path="manage-users" element={<ManageUsers />} />
           </Route>
         </Route>
       </Routes>

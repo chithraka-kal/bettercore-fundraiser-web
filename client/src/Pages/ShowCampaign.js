@@ -1,18 +1,27 @@
 import React from "react";
 import "./ShowCampaign.css";
 export default function ShowCampain() {
+  let Progress;
+  Progress = 0.6;
+
   return (
     <div className="cantainer">
-      <div className="inner_OuterDiv">
+      <div className="inner_OuterDiv h-200 my-10">
         <div className="inner_element innerLeft">
           <div className="left_elements left_top">
             <div className="image"></div>
           </div>
-          <div className="left_elements left_Bottom"></div>
+          <div className="left_elements left_Bottom">
+            <progress className="progress rounded" value={Progress} />
+
+            <div className="progress_details">
+              <p>We have Done it {Progress * 100}% of It</p>
+            </div>
+          </div>
         </div>
         <div className="inner_element innerRight mt-3">
           <div className="Right-Up">
-            <h1>Campain Name 0001</h1>
+            <div className="CampName">Campain Name 001</div>
             <h4>The Subtitle of the campain</h4>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
@@ -20,7 +29,7 @@ export default function ShowCampain() {
               quisquam similique repudiandae.
             </p>
           </div>
-          <div className="Right-Middle">
+          <div className="Right-Middle ">
             <div className="icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -136,20 +145,20 @@ export default function ShowCampain() {
               </svg>
             </div>
           </div>
-          <div className="donate_Form">
-            <div className="formdiv flex min-h-full flformdivex-1 flex-col justify-center px-6 py-2 lg:px-8">
+          <div className="donate_Form  ">
+            <div className="form_outer  formdiv flex min-h-full flformdivex-1 flex-col justify-center px-6 py-2 lg:px-8">
               <div className="sm:mx-auto sm:w-full sm:max-w-sm form_inner">
-                <h2 className="makedonate mt-1 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                <h2 className="makedonate -mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
                   Make Your Donation
                 </h2>
               </div>
 
-              <div className="mt-1 sm:mx-auto sm:w-full sm:max-w-sm">
+              <div className="input_outer mt-5 w-50">
                 <form action="#" method="POST" className="space-y-2">
                   <div>
                     <label
                       htmlFor="email"
-                      className="pl-2 block text-sm font-medium leading-6 text-gray-900"
+                      className="pl-2 block text-l font-medium leading-6 text-gray-900"
                     >
                       Email address
                     </label>
@@ -161,7 +170,7 @@ export default function ShowCampain() {
                         placeholder="  Enter Your Email Address"
                         required
                         autoComplete="email"
-                        className="pl-2 block w-full rounded-md border-0 py-1.5  outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
+                        className="pl-2 block w-full rounded-md border-0 py-3  outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
                       />
                     </div>
                   </div>
@@ -170,7 +179,7 @@ export default function ShowCampain() {
                     <div className="flex items-center justify-between">
                       <label
                         htmlFor="Amount"
-                        className="pl-2 block text-sm font-medium leading-6 text-gray-900"
+                        className="pl-2 block text-l font-medium leading-6 text-gray-900"
                       >
                         Donation Amount
                       </label>
@@ -183,13 +192,13 @@ export default function ShowCampain() {
                         placeholder="  Enter Your Donation Amount in Dollar"
                         required
                         autoComplete="current-password"
-                        className="pl-2 block w-full rounded-md border-0 py-1.5 placeh outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
+                        className="pl-2 block w-full rounded-md border-0 py-3 mb-5 placeh outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <div className="Donate_element my-2">
+                    <div className="Donate_element mt-2 h-20">
                       <button>Donate Now</button>
                     </div>
                   </div>

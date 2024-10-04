@@ -1,47 +1,110 @@
-import React from "react";
-import Image1 from "../assets/images/AboutUs.jpeg";
+import React from 'react';
+import './App.css'; // Import the CSS file for styling
 
-function AboutUs() {
+const AboutUs = () => {
   return (
-    <div className="container p-6 mx-auto bg-slate-200">
-      <div className="flex flex-col items-center lg:flex-row lg:items-start">
-        <div className="w-full lg:w-1/2">
-          <img
-            src={Image1}
-            alt="About Us"
-            className="object-cover w-full h-auto rounded-lg shadow-lg"
-          />
+    <div className="App">
+      {/* About Us Section */}
+      <div className="about-section">
+        <div className="about-content">
+          <div className="about-image">
+            <img 
+              src="https://img.freepik.com/free-vector/volunteers-collecting-goods-charity-into-huge-donation-box-donating-coins-into-jar-donation-charity-donation-funds-gift-kind-concept-pinkish-coral-bluevector-isolated-illustration_335657-1387.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1726876800&semt=ais_hybrid" 
+              alt="Charity Work Photo"
+            />
+          </div>
+          <div className="about-description">
+            <h1>About Us</h1>
+            <p>
+              Welcome to our Charity Donation Platform! We are committed to making a difference in the lives of those in need. 
+              Our platform connects donors with trusted charities to ensure that your contributions reach the right people and make 
+              a meaningful impact. We believe in transparency, compassion, and the power of giving. Together, we can create a 
+              better world. Join us in making a positive change, one donation at a time.
+            </p>
+          </div>
         </div>
+      </div>
 
-        
-        <div className="w-full mt-6 text-justify lg:w-1/2 lg:pl-10 lg:mt-0">
-          <h1 className="mb-10 text-4xl font-bold text-center ">ABOUT US</h1>
 
-          <p className="mb-4 text-lg ">
-            <span className="font-bold">Welcome</span> to our Campaigns platform, where we unite passionate
-            individuals and organizations to bring meaningful change to our
-            communities. Our mission is to empower those in need by connecting
-            them with donors who believe in their cause.
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* Cards Section */}
+      <div className="cards-section">
+        <div className="card">
+          <h2>WHAT WE DO</h2>
+          <p>
+          We connect donors with trusted, impactful charities. Our platform ensures that every contribution goes directly to those in need, supporting essential causes such as healthcare,
+           education, and disaster relief. We simplify the donation process, offering a secure and transparent way to make a meaningful difference.
           </p>
-
-          <p className="mb-4 text-lg">
-            Whether it’s providing relief to natural disaster victims,
-            supporting local schools, or launching innovative social projects,
-            our platform allows campaigns to raise the funds and support
-            necessary to make a real-world impact.
+        </div>
+        <div className="card">
+          <h2>WHY CHOOSE US</h2>
+          <p>
+          We prioritize transparency and accountability, providing detailed reports on how your donations are used. Our trusted network of charities ensures your funds create the greatest
+         possible impact. With a user-friendly platform and a commitment to ethical giving, we make it easy to support the causes you care about.
           </p>
-
-          <h2 className="mt-6 mb-4 text-2xl font-semibold">Our Mission</h2>
-          <p className="mb-4 text-lg">
-            Our mission is simple: to create a platform where people can make a
-            positive difference. We strive to make it easier for individuals and
-            organizations to launch, promote, and fundraise for their campaigns,
-            ensuring every cause gets the attention and support it deserves.
+        </div>
+        <div className="card">
+          <h2>OUR MISSION</h2>
+          <p>
+          Our mission is to empower individuals and communities through charitable donations. We aim to alleviate suffering, promote education, and enhance healthcare for the most vulnerable.
+           By connecting donors to life-changing initiatives, we strive to create a world where everyone has access to the resources they need to thrive.
           </p>
         </div>
       </div>
+
+      {/* Image Section */}
+      <div className="image">
+        <img 
+          src="https://averillsolutions.com/wp-content/uploads/2024/02/donor-retention_Large-CTA-1024x414.png" 
+          
+        />
+      </div>
+
+
+
+    
+      <div className="contact-content">
+          
+          <div className="contact-description">
+          
+            
+          
+            <div class="contact-description">
+            <ul>
+            <li>E-Mail : charity@outlook.com</li>
+            <li>Contact Number : +94-700111000</li>
+            <li>Hot Line : 011-111000111</li>
+            </ul>
+            </div>
+          </div>
+          <div className="contact-image">
+            <img 
+              src="https://cdni.iconscout.com/illustration/premium/thumb/fundraising-charity-and-donation-illustration-download-in-svg-png-gif-file-formats--volunteer-pack-business-illustrations-8245793.png?f=webp" 
+              alt="Charity Work Photo"
+            />
+          </div>
+        </div>
+      
+
+
+
+
+
     </div>
   );
-}
+};
 
 export default AboutUs;

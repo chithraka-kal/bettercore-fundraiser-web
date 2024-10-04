@@ -30,7 +30,7 @@ function App() {
           <Route path="/campaigns/my/edit/:id" element={<EditCampaign />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/admin/*" element={<AdminDashboard />}>
-            <Route path="manage-campaigns" element={<ManageCampaign />} />
+          <Route path="manage-campaigns" element={<ManageCampaign />} />
             <Route path="manage-users" element={<ManageUsers />} />
           </Route>
         </Route>

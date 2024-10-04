@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
-import EditCampaignModal from "./EditCampaignModal";
+import ViewCampaignModal from "./ViewCampaignModal"; // Updated import
 
 const ManageCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [selectedCampaign, setSelectedCampaign] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [campaignToDelete, setCampaignToDelete] = useState(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -16,12 +13,17 @@ const ManageCampaigns = () => {
           id: 1,
           name: "Charity Fundraiser",
           organizer: "Sameera Jayakodi",
+          description:
+            "This is a charity fundraiser for underprivileged children.",
+          donationValue: "5000 USD",
           status: "Active",
         },
         {
           id: 2,
           name: "Education Support",
           organizer: "Nipun Avishka",
+          description: "Education support for rural areas.",
+          donationValue: "3000 USD",
           status: "Completed",
         },
       ];
@@ -31,32 +33,9 @@ const ManageCampaigns = () => {
     fetchCampaigns();
   }, []);
 
-  const handleEditCampaign = (campaign) => {
+  const handleViewCampaign = (campaign) => {
     setSelectedCampaign(campaign);
-    setIsEditModalOpen(true);
-  };
-
-  const handleSaveCampaign = (updatedCampaign) => {
-    setCampaigns(
-      campaigns.map((campaign) =>
-        campaign.id === updatedCampaign.id ? updatedCampaign : campaign
-      )
-    );
-    setIsEditModalOpen(false);
-  };
-
-  const handleDeleteCampaign = (campaignId) => {
-    setCampaignToDelete(campaignId);
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleConfirmDelete = () => {
-    if (campaignToDelete) {
-      setCampaigns(
-        campaigns.filter((campaign) => campaign.id !== campaignToDelete)
-      );
-    }
-    setIsDeleteModalOpen(false);
+    setIsViewModalOpen(true);
   };
 
   const handlePayCampaignCreator = (campaignId) => {
@@ -93,18 +72,11 @@ const ManageCampaigns = () => {
               <td className="px-6 py-4 whitespace-nowrap">{campaign.status}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
-                  onClick={() => handleEditCampaign(campaign)}
+                  onClick={() => handleViewCampaign(campaign)}
                   className="px-4 py-2 mr-2 font-semibold text-red-600 bg-white border border-red-600 rounded"
                 >
-                  Edit
+                  View
                 </button>
-                <button
-                  onClick={() => handleDeleteCampaign(campaign.id)}
-                  className="px-4 py-2 mr-2 font-semibold text-white bg-red-500 rounded"
-                >
-                  Block
-                </button>
-
                 <button
                   onClick={() => handlePayCampaignCreator(campaign.id)}
                   disabled={campaign.status === "Active"}
@@ -123,19 +95,13 @@ const ManageCampaigns = () => {
       </table>
 
       {selectedCampaign && (
-        <EditCampaignModal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          campaign={selectedCampaign}
-          onSave={handleSaveCampaign}
+        <ViewCampaignModal
+          isOpen={isViewModalOpen}
+          onClose={() => setIsViewModalOpen(false)}
+          campaign={selectedCampaign} // Pass the selected campaign for viewing
+          onAccept={() => alert("Campaign Accepted")} // Add any accept logic here
         />
       )}
-
-      <DeleteConfirmationModal
-        isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={handleConfirmDelete}
-      />
     </div>
   );
 };

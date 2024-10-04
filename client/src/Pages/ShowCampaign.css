@@ -1,3 +1,8 @@
+@media only screen and (max-width: 500px) {
+  .list_outer {
+    width: 400px !important;
+  }
+}
 @media only screen and (max-width: 767px) {
   .inner_OuterDiv {
     flex-direction: column;
@@ -37,6 +42,17 @@
   }
   .Right-Up p {
     font-size: small !important;
+  }
+  .gmail,
+  .abc,
+  .amount {
+    font-size: 12px !important;
+  }
+  .list_outer {
+    width: 500px !important;
+  }
+  .list_outer h1 {
+    font-size: 25px !important;
   }
 }
 @media only screen and (max-width: 1200px) {
@@ -228,4 +244,62 @@ input_outer {
   margin-top: 10px;
   align-items: center;
   text-align: center;
+}
+
+td {
+  width: 100px;
+
+  height: 60px;
+}
+thead tr {
+  margin-bottom: 10px;
+}
+.abc {
+  height: 40px;
+  background-image: url(../assets/images/userlist.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+tr {
+  width: 400px;
+  display: flex;
+}
+tr :nth-child(1) {
+  width: 50px;
+  display: flex;
+  align-items: center;
+}
+tr :nth-child(2) {
+  width: fit-content;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10%;
+}
+tr :nth-child(3) {
+  width: 20%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list_outer {
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list_outer h1 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.gmail,
+.abc,
+.amount {
+  font-size: 15px;
 }

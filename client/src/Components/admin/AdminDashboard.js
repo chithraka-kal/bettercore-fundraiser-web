@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   return (
     <div className="flex">
       <div className="w-1/4 h-screen text-white bg-[#AF1B3F]">
-        <div className="p-6 text-xl font-bold">Campaign Admin</div>
+        <div className="p-6 text-2xl font-bold">hopelink Admin</div>
         <nav className="mt-10">
           <ul>
             <li className="p-4 hover:bg-[#F76C6C] transition-colors duration-300">

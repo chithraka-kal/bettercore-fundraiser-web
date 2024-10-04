@@ -1,5 +1,6 @@
 import React from "react";
 import "./ShowCampaign.css";
+import AlignItemsList from "../Components/List/List";
 export default function ShowCampain() {
   let Progress;
   Progress = 0.6;
@@ -207,6 +208,9 @@ export default function ShowCampain() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="list">
+        <AlignItemsList />
       </div>
     </div>
   );

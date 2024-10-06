@@ -7,7 +7,7 @@ import { UserContext } from "../context/UserContext";
 export default function ShowCampain() {
   let Progress;
   Progress = 0.6;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState("Loading...");
   const [details, setDetails] = useState(null);
   const [amount, setAmount] = useState(0);
   const [name, setName] = useState("");
@@ -20,13 +20,18 @@ export default function ShowCampain() {
 
   useEffect(() => {
     fetch(server + "campaign/" + id)
-      .then((res) => res.json())
-      .then((res) => {
-        setDetails(res);
-        setLoading(false);
-        if (status) {
-          if (status === "paid") alert("Donation Successful");
-          else alert("Donation Failed");
+      .then(async (res) => {
+        if (res.ok) {
+          const data = await res.json();
+          setDetails(data);
+          setLoading(null);
+          if (status) {
+            if (status === "paid") alert("Donation Successful");
+            else alert("Donation Failed");
+          }
+        }
+        if (res.status === 404) {
+          setLoading("Campaign not found");
         }
       })
       .catch((e) => console.log(e));
@@ -59,7 +64,7 @@ export default function ShowCampain() {
   };
 
   if (loading) {
-    return <h1 className="h-full w-full text-center p-10">Loading...</h1>;
+    return <h1 className="h-full w-full text-center p-10">{loading}</h1>;
   }
   return (
     <div className="cantainer">

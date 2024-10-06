@@ -246,12 +246,12 @@ input_outer {
   text-align: center;
 }
 
-td {
+.Tbody td {
   width: 100px;
 
   height: 60px;
 }
-thead tr {
+.Tbody thead tr {
   margin-bottom: 10px;
 }
 .abc {
@@ -260,16 +260,16 @@ thead tr {
   background-repeat: no-repeat;
   background-size: contain;
 }
-tr {
+.tableouter tr {
   width: 400px;
   display: flex;
 }
-tr :nth-child(1) {
+.tableouter tr :nth-child(1) {
   width: 50px;
   display: flex;
   align-items: center;
 }
-tr :nth-child(2) {
+.tableouter tr :nth-child(2) {
   width: fit-content;
   flex: 1;
   display: flex;
@@ -277,7 +277,7 @@ tr :nth-child(2) {
   justify-content: flex-start;
   padding-left: 10%;
 }
-tr :nth-child(3) {
+.tableouter tr :nth-child(3) {
   width: 20%;
 
   display: flex;

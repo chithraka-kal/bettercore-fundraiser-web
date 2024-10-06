@@ -12,7 +12,7 @@ export default function h() {
             <th>Amount</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="Tbody">
           <tr>
             <td>
               <div className="abc"></div>

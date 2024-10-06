@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./ShowCampaign.css";
 import AlignItemsList from "../Components/List/List";
+
+import CampainDetails from "../Components/List/CampainDetails";
+import ReactionButton from "../Components/List/ReactionButton";
+
 import { server } from "../utils";
 import { useLocation, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -17,6 +21,7 @@ export default function ShowCampain() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const status = queryParams.get("status");
+
 
   useEffect(() => {
     fetch(server + "campaign/" + id)
@@ -71,16 +76,25 @@ export default function ShowCampain() {
       <div className="inner_OuterDiv h-200 my-10">
         <div className="inner_element innerLeft">
           <div className="left_elements left_top">
-            <img src={server + "uploads/" + details.img} alt="" />
+    <img src={server + "uploads/" + details.img} alt="" />
           </div>
+            
           <div className="left_elements left_Bottom">
+            <p>{`$${details.currentDonationSum} USD raised of $${details.goal} goal`}</p>
             <progress
               className="progress rounded"
               value={details.currentDonationSum / details.goal}
             />
 
             <div className="progress_details">
-              <p>{`$${details.currentDonationSum} USD raised of $${details.goal} goal`}</p>
+              <p>We have Done it {Progress.toFixed(2) * 100}% of It</p>
+            </div>
+
+            <div className="donatedCont">
+              <div className="donatesicon"></div>
+              {donatedPeopleCount} people just donated
+              
+
             </div>
           </div>
         </div>
@@ -296,7 +310,12 @@ export default function ShowCampain() {
         </div>
       </div>
       <div className="list">
+
+        <CampainDetails />
+        <ReactionButton />
+
         <AlignItemsList donations={details.donations} />
+
       </div>
     </div>
   );

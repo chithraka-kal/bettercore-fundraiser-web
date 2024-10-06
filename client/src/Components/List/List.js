@@ -3,7 +3,7 @@ import React from "react";
 export default function h({ donations }) {
   return (
     <div className="list_outer">
-      <h1>Donation List</h1>
+      <h1>Top Donation List</h1>
       <table className="tableouter">
         <thead>
           <tr>
@@ -22,7 +22,7 @@ export default function h({ donations }) {
                 <div className="gmail">{donation.email}</div>
               </td>
               <td>
-                <div>${donation.amount}</div>
+                <div className="amountA">${donation.amount}</div>
               </td>
             </tr>
           ))}

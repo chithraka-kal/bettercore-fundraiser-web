@@ -7,7 +7,7 @@ export default function h() {
       <table className="tableouter">
         <thead>
           <tr>
-            <th>Avetat</th>
+            <th>Avatar</th>
             <th>Gmail</th>
             <th>Amount</th>
           </tr>

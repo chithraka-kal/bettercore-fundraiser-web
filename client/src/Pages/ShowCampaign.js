@@ -3,7 +3,11 @@ import "./ShowCampaign.css";
 import AlignItemsList from "../Components/List/List";
 export default function ShowCampain() {
   let Progress;
-  Progress = 0.6;
+
+  let goalAmount = 556448;
+  let raisedAmount = 255644;
+  Progress = raisedAmount / goalAmount;
+  let donatedPeopleCount = 251;
 
   return (
     <div className="cantainer">
@@ -13,10 +17,20 @@ export default function ShowCampain() {
             <div className="image"></div>
           </div>
           <div className="left_elements left_Bottom">
+            <p>
+              <span className="raised_amount">
+                <b>${raisedAmount} USD </b>
+              </span>
+              raised of ${goalAmount} goal
+            </p>
             <progress className="progress rounded" value={Progress} />
-
             <div className="progress_details">
-              <p>We have Done it {Progress * 100}% of It</p>
+              <p>We have Done it {Progress.toFixed(2) * 100}% of It</p>
+            </div>
+
+            <div className="donatedCont">
+              <div className="donatesicon"></div>
+              {donatedPeopleCount} people just donated
             </div>
           </div>
         </div>

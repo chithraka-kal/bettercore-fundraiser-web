@@ -1,6 +1,8 @@
 import React from "react";
 import "./ShowCampaign.css";
 import AlignItemsList from "../Components/List/List";
+import CampainDetails from "../Components/List/CampainDetails";
+import ReactionButton from "../Components/List/ReactionButton";
 export default function ShowCampain() {
   let Progress;
 
@@ -14,7 +16,9 @@ export default function ShowCampain() {
       <div className="inner_OuterDiv h-200 my-10">
         <div className="inner_element innerLeft">
           <div className="left_elements left_top">
-            <div className="image"></div>
+            <div className="image">
+              <div className="imageContainer"></div>
+            </div>
           </div>
           <div className="left_elements left_Bottom">
             <p>
@@ -224,6 +228,8 @@ export default function ShowCampain() {
         </div>
       </div>
       <div className="list">
+        <CampainDetails />
+        <ReactionButton />
         <AlignItemsList />
       </div>
     </div>

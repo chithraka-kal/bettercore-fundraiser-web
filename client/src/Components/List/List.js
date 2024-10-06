@@ -3,7 +3,7 @@ import React from "react";
 export default function h() {
   return (
     <div className="list_outer">
-      <h1>Donation List</h1>
+      <h1>Top Donation List</h1>
       <table className="tableouter">
         <thead>
           <tr>
@@ -21,7 +21,7 @@ export default function h() {
               <div className="gmail">Dilshansanjeewa@gmail.com</div>
             </td>
             <td>
-              <div className="amount">20$</div>
+              <div className="amountA">274$</div>
             </td>
           </tr>
           <tr>
@@ -32,7 +32,7 @@ export default function h() {
               <div className="gmail">AjithMuthukumarana@gmail.com</div>
             </td>
             <td>
-              <div className="amount">80$</div>
+              <div className="amountA">23$</div>
             </td>
           </tr>
           <tr>
@@ -43,7 +43,7 @@ export default function h() {
               <div className="gmail">AbcKannagara@gmail.com</div>
             </td>
             <td>
-              <div className="amount">120$</div>
+              <div className="amountA">150$</div>
             </td>
           </tr>
         </tbody>

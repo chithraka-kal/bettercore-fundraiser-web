@@ -14,6 +14,7 @@ import AdminDashboard from "./Components/admin/AdminDashboard";
 import ManageCampaign from "./Components/admin/ManageCampaign";
 import ManageUsers from "./Components/admin/ManageUsers";
 import AboutUs from "./Pages/AboutUs";
+import AdminIndex from "./Components/admin/AdminIndex";
 
 function App() {
   return (
@@ -29,8 +30,12 @@ function App() {
           <Route path="/campaigns/my/create" element={<CreateCampaign />} />
           <Route path="/campaigns/my/edit/:id" element={<EditCampaign />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/admin/*" element={<AdminDashboard />}>
-          <Route path="manage-campaigns" element={<ManageCampaign />} />
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route index element={<AdminIndex />} />
+            <Route
+              path="manage-campaigns"
+              element={<ManageCampaign />}
+            />
             <Route path="manage-users" element={<ManageUsers />} />
           </Route>
         </Route>

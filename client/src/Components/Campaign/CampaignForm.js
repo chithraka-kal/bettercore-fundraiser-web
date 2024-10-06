@@ -94,7 +94,7 @@ function CampaignForm({ onSubmit, editCampaign }) {
                 setName(data.name);
                 setDescription(data.description);
                 // setProofLetter(data.proof);
-                setGoal(data.goal.$numberDecimal);
+                setGoal(data.goal/100);
                 setAccountHolderName(data.holder);
                 setBankName(data.bankName);
                 setAccountNumber(data.accNumber);

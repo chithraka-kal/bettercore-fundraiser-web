@@ -7,7 +7,7 @@ import visa from "../assets/images/visa.png";
 
 function Footer() {
   return (
-    <footer className="bg-[#2C1C18] text-gray-300 py-10">
+    <footer className="bg-[#2C1C18] text-gray-300 py-10 mt-auto">
       <div className="container flex flex-col items-center justify-between px-8 mx-auto md:flex-row md:items-start">
         <div className="text-center md:text-left md:w-1/2">
           <h3 className="mb-4 text-lg font-semibold text-white">

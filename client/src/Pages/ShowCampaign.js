@@ -1,33 +1,91 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ShowCampaign.css";
 import AlignItemsList from "../Components/List/List";
+
 import CampainDetails from "../Components/List/CampainDetails";
 import ReactionButton from "../Components/List/ReactionButton";
+
+import { server } from "../utils";
+import { useLocation, useParams } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 export default function ShowCampain() {
   let Progress;
+  Progress = 0.6;
+  const [loading, setLoading] = useState("Loading...");
+  const [details, setDetails] = useState(null);
+  const [amount, setAmount] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const { id } = useParams();
+  const { userInfo } = useContext(UserContext);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const status = queryParams.get("status");
 
-  let goalAmount = 556448;
-  let raisedAmount = 255644;
-  Progress = raisedAmount / goalAmount;
-  let donatedPeopleCount = 251;
 
+  useEffect(() => {
+    fetch(server + "campaign/" + id)
+      .then(async (res) => {
+        if (res.ok) {
+          const data = await res.json();
+          setDetails(data);
+          setLoading(null);
+          if (status) {
+            if (status === "paid") alert("Donation Successful");
+            else alert("Donation Failed");
+          }
+        }
+        if (res.status === 404) {
+          setLoading("Campaign not found");
+        }
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
+  const makeDonation = async (e) => {
+    e.preventDefault();
+    if (amount < 1) {
+      alert("Minimum donation amount is 1 dollar");
+    } else {
+      await fetch(server + "donation/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          amount,
+          campaign: id,
+        }),
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          window.location.replace(res.url);
+        })
+        .catch((e) => console.log(e));
+    }
+  };
+
+  if (loading) {
+    return <h1 className="h-full w-full text-center p-10">{loading}</h1>;
+  }
   return (
     <div className="cantainer">
       <div className="inner_OuterDiv h-200 my-10">
         <div className="inner_element innerLeft">
           <div className="left_elements left_top">
-            <div className="image">
-              <div className="imageContainer"></div>
-            </div>
+    <img src={server + "uploads/" + details.img} alt="" />
           </div>
+            
           <div className="left_elements left_Bottom">
-            <p>
-              <span className="raised_amount">
-                <b>${raisedAmount} USD </b>
-              </span>
-              raised of ${goalAmount} goal
-            </p>
-            <progress className="progress rounded" value={Progress} />
+            <p>{`$${details.currentDonationSum} USD raised of $${details.goal} goal`}</p>
+            <progress
+              className="progress rounded"
+              value={details.currentDonationSum / details.goal}
+            />
+
             <div className="progress_details">
               <p>We have Done it {Progress.toFixed(2) * 100}% of It</p>
             </div>
@@ -35,18 +93,15 @@ export default function ShowCampain() {
             <div className="donatedCont">
               <div className="donatesicon"></div>
               {donatedPeopleCount} people just donated
+              
+
             </div>
           </div>
         </div>
         <div className="inner_element innerRight mt-3">
           <div className="Right-Up">
-            <div className="CampName">Campain Name 001</div>
-            <h4>The Subtitle of the campain</h4>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
-              officia nisi doloremque temporibus laborum. Quos commodi sint
-              quisquam similique repudiandae.
-            </p>
+            <div className="CampName">{details.name}</div>
+            <p>{details.description}</p>
           </div>
           <div className="Right-Middle ">
             <div className="icons">
@@ -173,26 +228,52 @@ export default function ShowCampain() {
               </div>
 
               <div className="input_outer mt-5 w-50">
-                <form action="#" method="POST" className="space-y-2">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="pl-2 block text-l font-medium leading-6 text-gray-900"
-                    >
-                      Email address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="  Enter Your Email Address"
-                        required
-                        autoComplete="email"
-                        className="pl-2 block w-full rounded-md border-0 py-3  outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
-                      />
-                    </div>
-                  </div>
+                <form onSubmit={makeDonation} className="space-y-2">
+                  {!userInfo && (
+                    <>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="pl-2 block text-l font-medium leading-6 text-gray-900"
+                        >
+                          Your Name
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            placeholder="  Enter Your Name"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="pl-2 block w-full rounded-md border-0 py-3  outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="pl-2 block text-l font-medium leading-6 text-gray-900"
+                        >
+                          Email address
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="  Enter Your Email Address"
+                            required
+                            autoComplete="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="pl-2 block w-full rounded-md border-0 py-3  outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )}
 
                   <div>
                     <div className="flex items-center justify-between">
@@ -207,10 +288,11 @@ export default function ShowCampain() {
                       <input
                         id="Amount"
                         name="Amount"
-                        type="text"
+                        type="number"
                         placeholder="  Enter Your Donation Amount in Dollar"
                         required
-                        autoComplete="current-password"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
                         className="pl-2 block w-full rounded-md border-0 py-3 mb-5 placeh outline-0 ring-1   placeholder:text-gray-400   sm:text-sm mb-4 sm:leading-6"
                       />
                     </div>
@@ -218,7 +300,7 @@ export default function ShowCampain() {
 
                   <div>
                     <div className="Donate_element mt-2 h-20">
-                      <button>Donate Now</button>
+                      <button type="submit">Donate Now</button>
                     </div>
                   </div>
                 </form>
@@ -228,9 +310,12 @@ export default function ShowCampain() {
         </div>
       </div>
       <div className="list">
+
         <CampainDetails />
         <ReactionButton />
-        <AlignItemsList />
+
+        <AlignItemsList donations={details.donations} />
+
       </div>
     </div>
   );

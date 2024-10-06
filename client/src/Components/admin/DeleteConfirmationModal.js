@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
+const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, user }) => {
   if (!isOpen) return null;
 
   return (
@@ -20,9 +20,14 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
           </button>
           <button
             onClick={onConfirm}
-            className="px-4 py-2 font-semibold text-white bg-red-600 rounded hover:bg-red-700"
+            className={
+              "px-4 py-2 font-semibold text-white rounded" +
+              (user.status === "active"
+                ? " bg-red-600 hover:bg-red-700"
+                : " bg-green-600 hover:bg-green-700")
+            }
           >
-            Block
+            {user.status === "active" ? "Block" : "Unblock"}
           </button>
         </div>
       </div>

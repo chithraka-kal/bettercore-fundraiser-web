@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import EditUserModal from "./EditUserModal";
+import { server } from "../../utils";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -12,25 +13,10 @@ const ManageUsers = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const mockUsers = [
-        {
-          id: 1,
-          name: "Sameera Jayakodi",
-          email: "sameerajayakodi456@gmail.com",
-          role: "Admin",
-        },
-        {
-          id: 2,
-          name: "Nipun De Soysa",
-          email: "nipunAvishka@gmail.com",
-          role: "Admin",
-        },
-      ];
-      setUsers(mockUsers);
-    };
-
-    fetchUsers();
+    fetch(server + "user/all", { method: "GET", credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch((err) => console.log(err));
   }, []);
 
   const handleEditUser = (user) => {
@@ -38,22 +24,60 @@ const ManageUsers = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleSaveUser = (updatedUser) => {
-    setUsers(
-      users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-    );
+  const handleSaveUser = async (updatedUser) => {
+    await fetch(server + "user/update/" + updatedUser.id, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        role: updatedUser.role,
+        email: updatedUser.email,
+      }),
+    })
+      .then((res) => {
+        setUsers(
+          users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+        );
+        setIsEditModalOpen(false);
+      })
+      .catch((err) => console.log(err));
   };
 
-  const handleDeleteUser = (userId) => {
-    setUserToDelete(userId);
+  const handleDeleteUser = (userId, status) => {
+    setUserToDelete({ userId, status });
     setIsDeleteModalOpen(true);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     if (userToDelete) {
-      setUsers(users.filter((user) => user.id !== userToDelete));
+      await fetch(server + "user/block/" + userToDelete.userId, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          status: userToDelete.status === "active" ? "blocked" : "active",
+        }),
+      })
+        .then((res) => {
+          setUsers(
+            users.map((user) =>
+              user.id == userToDelete.userId
+                ? {
+                    ...user,
+                    status:
+                      userToDelete.status === "active" ? "blocked" : "active",
+                  }
+                : user
+            )
+          );
+          setIsDeleteModalOpen(false);
+        })
+        .catch((err) => console.log(err));
     }
-    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -90,10 +114,13 @@ const ManageUsers = () => {
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDeleteUser(user.id)}
-                  className="px-4 py-2 font-semibold text-white bg-red-500 rounded"
+                  onClick={() => handleDeleteUser(user.id, user.status)}
+                  className={
+                    "px-4 py-2 font-semibold text-white rounded" +
+                    (user.status === "active" ? " bg-red-600" : " bg-green-600")
+                  }
                 >
-                  Block
+                  {user.status === "active" ? "Block" : "Unblock"}
                 </button>
               </td>
             </tr>
@@ -112,8 +139,9 @@ const ManageUsers = () => {
 
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
+        user={userToDelete}
         onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={handleConfirmDelete}
+        onConfirm={() => handleConfirmDelete()}
       />
     </div>
   );

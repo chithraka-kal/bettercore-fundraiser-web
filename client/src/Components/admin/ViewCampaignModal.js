@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import { server } from "../../utils";
 
-const ViewCampaignModal = ({ isOpen, onClose, campaign, onAccept }) => {
+const ViewCampaignModal = ({ isOpen, onClose, campaign, onAccept,onDeclain }) => {
   const [name, setName] = useState("");
   const [organizer, setOrganizer] = useState("");
   const [description, setDescription] = useState("");
@@ -57,10 +58,16 @@ const ViewCampaignModal = ({ isOpen, onClose, campaign, onAccept }) => {
           {" "}
           Close
         </button>
-
+        <button
+          onClick={onDeclain}
+          className="px-5 py-2 text-white bg-[#a31622] rounded hover:bg-[#8f1420]"
+        >
+          {" "}
+          Declain
+        </button>
         <button
           onClick={onAccept}
-          className="px-5 py-2 text-white bg-[#a31622] rounded hover:bg-[#8f1420]"
+          className="px-5 py-2 text-white bg-[#18a316] rounded hover:bg-[#148f16]"
         >
           {" "}
           Accept
@@ -69,7 +76,7 @@ const ViewCampaignModal = ({ isOpen, onClose, campaign, onAccept }) => {
 
       <div className="mt-6 text-center">
         <a
-          href="/path/to/campaign-details.pdf"
+          href={server + "uploads/" + campaign.proof}
           target="_blank"
           className="text-[#a31622] underline hover:text-[#8f1420]"
         >

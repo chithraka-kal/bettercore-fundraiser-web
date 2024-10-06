@@ -41,8 +41,8 @@ const EditUserModal = ({ isOpen, onClose, user, onSave }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-              required
+              className="w-full p-2 border border-gray-300 rounded-lg bg-gray-200"
+              disabled
             />
           </div>
           <div className="mb-4">
@@ -55,8 +55,8 @@ const EditUserModal = ({ isOpen, onClose, user, onSave }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-              required
+              className="w-full p-2 border border-gray-300 rounded-lg bg-gray-200"
+              disabled
             />
           </div>
           <div className="mb-4">
@@ -70,8 +70,8 @@ const EditUserModal = ({ isOpen, onClose, user, onSave }) => {
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-lg"
             >
-              <option value="User">User</option>
-              <option value="Admin">Admin</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
           <div className="flex justify-end space-x-4">

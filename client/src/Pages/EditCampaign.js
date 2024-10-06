@@ -17,13 +17,13 @@ function EditCampaign() {
     data.set("swift", campaign.bankDetails.swiftCode);
     data.set("img", campaign.campaignImage);
     data.set("proof", campaign.proofLetter);
-    await fetch(server + "campaign", {
+    await fetch(server + "campaign/" + id, {
       method: "PUT",
       credentials: "include",
       body: data,
     })
       .then((res) => {
-        if (res.status === 200) {
+        if (res.ok) {
           alert("Campaign updated successfully");
         } else {
           alert("Failed to update campaign");

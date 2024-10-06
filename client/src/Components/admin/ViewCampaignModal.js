@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import { server } from "../../utils";
 
 const ViewCampaignModal = ({ isOpen, onClose, campaign, onAccept }) => {
   const [name, setName] = useState("");
@@ -69,7 +70,7 @@ const ViewCampaignModal = ({ isOpen, onClose, campaign, onAccept }) => {
 
       <div className="mt-6 text-center">
         <a
-          href="/path/to/campaign-details.pdf"
+          href={server+"uploads/"+campaign.proof}
           target="_blank"
           className="text-[#a31622] underline hover:text-[#8f1420]"
         >

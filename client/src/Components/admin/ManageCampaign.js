@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ViewCampaignModal from "./ViewCampaignModal"; // Updated import
+import { server } from "../../utils";
 
 const ManageCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -7,30 +8,10 @@ const ManageCampaigns = () => {
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
   useEffect(() => {
-    const fetchCampaigns = async () => {
-      const mockCampaigns = [
-        {
-          id: 1,
-          name: "Charity Fundraiser",
-          organizer: "Sameera Jayakodi",
-          description:
-            "This is a charity fundraiser for underprivileged children.",
-          donationValue: "5000 USD",
-          status: "Active",
-        },
-        {
-          id: 2,
-          name: "Education Support",
-          organizer: "Nipun Avishka",
-          description: "Education support for rural areas.",
-          donationValue: "3000 USD",
-          status: "Completed",
-        },
-      ];
-      setCampaigns(mockCampaigns);
-    };
-
-    fetchCampaigns();
+    fetch(server + "campaign/admin", { method: "GET", credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => setCampaigns(data))
+      .catch((err) => console.log(err));
   }, []);
 
   const handleViewCampaign = (campaign) => {

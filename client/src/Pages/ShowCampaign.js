@@ -16,12 +16,12 @@ export default function ShowCampain() {
   const [amount, setAmount] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [peoples, setPeoples] = useState(0);
   const { id } = useParams();
   const { userInfo } = useContext(UserContext);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const status = queryParams.get("status");
-
 
   useEffect(() => {
     fetch(server + "campaign/" + id)
@@ -29,6 +29,12 @@ export default function ShowCampain() {
         if (res.ok) {
           const data = await res.json();
           setDetails(data);
+          setPeoples(
+            data.donations.reduce((uniqueNames, person) => {
+              uniqueNames.add(person.email); // Add each person's name to the Set
+              return uniqueNames;
+            }, new Set()).size
+          );
           setLoading(null);
           if (status) {
             if (status === "paid") alert("Donation Successful");
@@ -76,9 +82,9 @@ export default function ShowCampain() {
       <div className="inner_OuterDiv h-200 my-10">
         <div className="inner_element innerLeft">
           <div className="left_elements left_top">
-    <img src={server + "uploads/" + details.img} alt="" />
+            <img src={server + "uploads/" + details.img} alt="" />
           </div>
-            
+
           <div className="left_elements left_Bottom">
             <p>{`$${details.currentDonationSum} USD raised of $${details.goal} goal`}</p>
             <progress
@@ -87,21 +93,21 @@ export default function ShowCampain() {
             />
 
             <div className="progress_details">
-              <p>We have Done it {Progress.toFixed(2) * 100}% of It</p>
+              <p>
+                We have Done it{" "}
+                {(details.currentDonationSum / details.goal) * 100}% of It
+              </p>
             </div>
 
             <div className="donatedCont">
               <div className="donatesicon"></div>
-              {donatedPeopleCount} people just donated
-              
-
+              {peoples} people just donated
             </div>
           </div>
         </div>
         <div className="inner_element innerRight mt-3">
           <div className="Right-Up">
             <div className="CampName">{details.name}</div>
-            <p>{details.description}</p>
           </div>
           <div className="Right-Middle ">
             <div className="icons">
@@ -310,12 +316,10 @@ export default function ShowCampain() {
         </div>
       </div>
       <div className="list">
-
-        <CampainDetails />
+        <CampainDetails details={details.description} />
         <ReactionButton />
 
         <AlignItemsList donations={details.donations} />
-
       </div>
     </div>
   );

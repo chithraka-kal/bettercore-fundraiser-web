@@ -30,6 +30,7 @@ function App() {
           <Route path="/campaigns/my/create" element={<CreateCampaign />} />
           <Route path="/campaigns/my/edit/:id" element={<EditCampaign />} />
           <Route path="/about-us" element={<AboutUs />} />
+
           <Route path="/admin" element={<AdminDashboard />}>
             <Route index element={<AdminIndex />} />
             <Route

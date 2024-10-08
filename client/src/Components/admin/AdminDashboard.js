@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const AdminDashboard = () => {
-  const location = useLocation();
-  const isNestedRoute =
-    location.pathname.includes("/admin/manage-campaigns") ||
-    location.pathname.includes("/admin/manage-users") ||
-    location.pathname.includes("/admin/edit-user");
-
+  const { userInfo } = useContext(UserContext);
+  if (!userInfo || userInfo.role !== "admin") {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className="flex">
       <div className="w-1/4 h-screen text-white bg-[#AF1B3F]">

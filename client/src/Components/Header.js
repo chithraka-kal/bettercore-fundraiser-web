@@ -1,11 +1,22 @@
-import React, { useState} from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { UserContext } from "../context/UserContext";
+import { server } from "../utils";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  function logout() {
+    fetch(server + "auth/logout", {
+      credentials: "include",
+      method: "POST",
+    });
+    setUserInfo(null);
+  }
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
@@ -46,16 +57,34 @@ function Header() {
         </div>
 
         <div className="hidden md:flex">
-          <Link to="/register">
-            <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
-              Sign up
-            </button>
-          </Link>
-          <Link to="/login">
-            <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-full">
-              Sign in
-            </button>
-          </Link>
+          {userInfo ? (
+            <>
+              <Link to="/user">
+                <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
+                  User
+                </button>
+              </Link>
+              <button
+                onClick={logout}
+                className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-full"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/register">
+                <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-full">
+                  Sign up
+                </button>
+              </Link>
+              <Link to="/login">
+                <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-full">
+                  Sign in
+                </button>
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -108,14 +137,25 @@ function Header() {
             About Us
           </Link>
 
-          <div className="flex flex-col items-center mt-4 space-y-2">
-            <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-lg">
-              Sign up
-            </button>
-            <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-lg">
-              Sign in
-            </button>
-          </div>
+          {userInfo ? (
+            <div className="flex flex-col items-center mt-4 space-y-2">
+              <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-lg">
+                User
+              </button>
+              <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-lg">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center mt-4 space-y-2">
+              <button className="px-4 py-2 font-semibold text-red-600 border border-red-600 rounded-l-lg">
+                Sign up
+              </button>
+              <button className="px-4 py-2 font-semibold text-white bg-red-600 border border-red-600 rounded-r-lg">
+                Sign in
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

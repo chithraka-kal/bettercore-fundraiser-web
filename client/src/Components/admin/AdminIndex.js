@@ -42,7 +42,7 @@ function AdminIndex() {
             Recent Donations
           </h2>
           <ul className="mt-4">
-            {details &&
+            {details.list &&
               details.list.map((donation) => (
                 <li className="text-sm text-[#555]">
                   {`${donation.name} donated $${donation.amount} to ${donation.campaign}`}

@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { server } from "../utils";
+import { UserContext } from "../context/UserContext";
 
 function MyCampaigns() {
   const [campaigns, setCampaigns] = useState([]);
+  const { userInfo } = useContext(UserContext);
 
   const deleteCampaign = async (id) => {
     const res = window.confirm(
@@ -38,6 +40,10 @@ function MyCampaigns() {
       })
       .catch((e) => console.log(e));
   }, []);
+
+  if (!userInfo) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="my-10 px-6">

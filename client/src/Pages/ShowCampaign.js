@@ -95,7 +95,9 @@ export default function ShowCampain() {
             <div className="progress_details">
               <p>
                 We have Done it{" "}
-                {(details.currentDonationSum / details.goal) * 100}% of It
+                {Math.round((details.currentDonationSum / details.goal) * 10000) /
+                  100}
+                % of It
               </p>
             </div>
 

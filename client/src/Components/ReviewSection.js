@@ -8,7 +8,7 @@ const ReviewsSection = () => {
         'https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
       name: 'Paul Starr',
       reviewText:
-        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius accusamus error officiis atque voluptates magnam!',
+        'This platform made donating easy and transparent. I felt confident knowing my contribution was going directly to those in need. Highly recommend for anyone looking to support meaningful causes.',
       rating: 5
     },
     {
@@ -16,7 +16,7 @@ const ReviewsSection = () => {
         'https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
       name: 'Sarah Lee',
       reviewText:
-        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius accusamus error officiis atque voluptates magnam!',
+        'A seamless experience from start to finish. The donation process was simple, and I appreciated the updates on how funds are being used. Truly a great platform for impactful fundraising!',
       rating: 5
     },
     {
@@ -24,7 +24,7 @@ const ReviewsSection = () => {
         'https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
       name: 'John Doe',
       reviewText:
-        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius accusamus error officiis atque voluptates magnam!',
+        'I love how the platform connects donors with real causes. It’s rewarding to see the positive difference my donations have made. I’ll definitely use this site for future fundraising efforts.',
       rating: 5
     }
   ];

@@ -1,5 +1,5 @@
 import React from 'react';
-import Review from '../Components/ReviewCard.jsx'; 
+import Review from '../Components/ReviewCard.js'; 
 
 const ReviewsSection = () => {
   const reviews = [

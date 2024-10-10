@@ -6,6 +6,7 @@ import Features from '../Components/Features.js';
 import Campaign from '../Components/Campaign';
 import CardContainer from '../Components/CardContainer.js';
 import Banner from '../Components/Banner.js';
+import ReviewsSection from "../Components/ReviewSection.js";
 import GetStarted from '../Components/GetStarted.js';
 import '../css/LandingPage.css';
 
@@ -18,6 +19,7 @@ export default function IndexPage() {
       <Campaign />
       <CardContainer />
       <Banner />
+      <ReviewsSection />
       <GetStarted />
     </div>
   );
